@@ -4,6 +4,7 @@ set -ex
 
 PACKAGE='openjdk-7'
 PATCH_NAME='fontfix.patch'
+PPA_VERSION='ppa1'
 
 function build {
 	DIST=$1
@@ -27,7 +28,7 @@ function build {
 	CHANGELOG=$(mktemp)
 
 	cat <<-EOF > ${CHANGELOG}
-	openjdk-7 (${VERSION}ppa1) ${DIST}; urgency=low
+	openjdk-7 (${VERSION}${PPA_VERSION}) ${DIST}; urgency=low
 
 	  * Add fontfix patch
 	  * Use fontfix patch
