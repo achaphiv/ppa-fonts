@@ -6,11 +6,11 @@ PACKAGE='openjdk-7'
 PATCH_NAME='fontfix.patch'
 PPA_VERSION='ppa2'
 
+STARTING_DIR=$(pwd)
+
 function build {
 	DIST=$1
 	VERSION=$2
-
-	STARTING_DIR=$(pwd)
 
 	BUILD_DIR=build-${PACKAGE}-${DIST}
 	rm -r ${BUILD_DIR} || true
@@ -46,6 +46,8 @@ function build {
 	cd ../
 
 	dput openjdk-fontfix *changes
+
+	cd ${STARTING_DIR}
 }
 
 build precise 7u51-2.4.4-0ubuntu0.12.04.2
