@@ -4,7 +4,7 @@ set -ex
 
 PACKAGE='openjdk-7'
 PATCH_NAME='fontfix.patch'
-PPA_VERSION='ppa1'
+PPA_VERSION='ppa2'
 
 function build {
 	DIST=$1
