@@ -45,7 +45,7 @@ function build {
 
 	cd ../
 
-	dput openjdk-fontfix *changes
+	dput -c ${STARTING_DIR}/dput.cf openjdk-fontfix *changes
 
 	cd ${STARTING_DIR}
 }
