@@ -4,7 +4,7 @@ set -ex
 
 PACKAGE='freetype'
 PATCH_NAME='freetype-entire-infinality-patchset-20130514-01.patch'
-PPA_VERSION='ppa1infinality20130515'
+PPA_VERSION='ppa3infinality20130515'
 
 STARTING_DIR=$(pwd)
 
@@ -18,6 +18,10 @@ function build {
 	cd ${BUILD_DIR}
 
 	apt-get source ${PACKAGE}=${VERSION}
+
+	# Meh repo has own copy from old dist
+	rm ${PACKAGE}*.orig.tar.gz
+	wget https://launchpad.net/~no1wantdthisname/+archive/ppa/+files/freetype_2.4.12.orig.tar.gz
 
 	cd ${PACKAGE}*/
 
