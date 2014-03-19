@@ -28,7 +28,7 @@ function build {
 	CHANGELOG=$(mktemp)
 
 	cat <<-EOF > ${CHANGELOG}
-	openjdk-7 (${VERSION}${PPA_VERSION}) ${DIST}; urgency=low
+	${PACKAGE} (${VERSION}${PPA_VERSION}) ${DIST}; urgency=low
 
 	  * Add fontfix patch
 	  * Use fontfix patch
