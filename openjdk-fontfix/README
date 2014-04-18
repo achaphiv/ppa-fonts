@@ -35,7 +35,8 @@ sudo apt-get update
 sudo apt-get install openjdk-7-jdk
 ```
 
-Uninstall:
+# Uninstall
+
 ```
 sudo apt-get install ppa-purge
 sudo ppa-purge ppa:no1wantdthisname/openjdk-fontfix
