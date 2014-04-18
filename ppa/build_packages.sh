@@ -3,14 +3,14 @@
 set -ex
 
 PACKAGE='freetype'
-PATCH_NAME='freetype-entire-infinality-patchset-20130514-01.patch'
-PPA_VERSION='ppa3infinality20130515'
 
 STARTING_DIR=$(pwd)
 
 function build {
 	DIST=$1
 	VERSION=$2
+	PATCH_NAME=$3
+	PPA_VERSION=$4
 
 	BUILD_DIR=build-${PACKAGE}-${DIST}
 	rm -r ${BUILD_DIR} || true
@@ -71,5 +71,5 @@ function build {
 	cd ${STARTING_DIR}
 }
 
-build saucy 2.4.12-0ubuntu1.1
+build saucy 2.4.12-0ubuntu1.1 'freetype-entire-infinality-patchset-20130514-01.patch' 'ppa3infinality20130515'
 
