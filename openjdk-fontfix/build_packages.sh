@@ -4,7 +4,7 @@ set -ex
 
 PACKAGE='openjdk-7'
 PATCH_NAME='fontfix.patch'
-PPA_VERSION='ppa2'
+PPA_VERSION='ppa1'
 
 STARTING_DIR=$(pwd)
 
@@ -50,6 +50,7 @@ function build {
 	cd ${STARTING_DIR}
 }
 
-build precise 7u51-2.4.4-0ubuntu0.12.04.2
-build saucy 7u51-2.4.4-0ubuntu0.13.10.1
+#build precise 7u51-2.4.4-0ubuntu0.12.04.2
+#build saucy 7u51-2.4.4-0ubuntu0.13.10.1
+build trusty 7u51-2.4.6-1ubuntu4
 
