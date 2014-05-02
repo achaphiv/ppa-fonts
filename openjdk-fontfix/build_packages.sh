@@ -52,5 +52,4 @@ function build {
 
 #build precise 7u51-2.4.4-0ubuntu0.12.04.2
 #build saucy 7u51-2.4.4-0ubuntu0.13.10.1
-build trusty 7u51-2.4.6-1ubuntu4
-
+build trusty 7u55-2.4.7-1ubuntu1
