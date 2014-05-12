@@ -72,4 +72,4 @@ function build {
 }
 
 #build saucy 2.4.12-0ubuntu1.1 'freetype-entire-infinality-patchset-20130514-01.patch' 'ppa3infinality20130515'
-build trusty 2.5.2-1ubuntu2 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
+build trusty 2.5.2-1ubuntu2.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
