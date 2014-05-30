@@ -19,6 +19,7 @@ eclipse: http://i.imgur.com/GmG5Ip3.png
 Intellij Idea 12 before (oracle jdk 1.7): http://i.imgur.com/wzVVm.png
 
 After (this repo's openjdk and various infinality options):
+
 | fontconfig | env vars   | result                       |
 | ---------- | ---------- | ---------------------------- |
 | default    | infinality | http://i.imgur.com/BwVk4.png |
