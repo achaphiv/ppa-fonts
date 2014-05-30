@@ -3,16 +3,17 @@ Provides much better font rendering.
 Note: This ppa only updates for last LTS/release (14.04).
 
 # How
-For distribution <= 13.04:
-  Applies infinality patches (currently 2013-05-15) against freetype.
-  See: http://www.infinality.net/
-
-For distribution >= 14.04:
-  Applies bohoomil's variant.
-  See: https://github.com/bohoomil/fontconfig-ultimate/blob/pkgbuild/01_freetype2-iu/infinality-2.5.3.patch
 
 This ppa is built via:
 https://github.com/achaphiv/ppa-fonts/blob/master/ppa/build_packages.sh
+
+## Distribution <= 13.04:
+Applies infinality patches (currently 2013-05-15) against freetype.  
+See: http://www.infinality.net/
+
+## Distribution >= 14.04:
+Applies bohoomil's variant.  
+See: https://github.com/bohoomil/fontconfig-ultimate/blob/pkgbuild/01_freetype2-iu/infinality-2.5.3.patch
 
 # Java
 https://launchpad.net/~no1wantdthisname/+archive/openjdk-fontfix
