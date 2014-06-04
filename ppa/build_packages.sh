@@ -19,10 +19,6 @@ function build {
 
 	apt-get source ${PACKAGE}=${VERSION}
 
-	# Meh repo has own copy from old dist
-	#rm ${PACKAGE}*.orig.tar.gz
-	#wget https://launchpad.net/~no1wantdthisname/+archive/ppa/+files/freetype_2.4.12.orig.tar.gz
-
 	cd ${PACKAGE}*/
 
 	# ignore compiler warnings
