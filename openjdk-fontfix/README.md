@@ -1,5 +1,6 @@
 Better font rendering for java. Particularly for swing applications.
 
+# How
 Based off this patch:
 https://gist.github.com/2963640
 
