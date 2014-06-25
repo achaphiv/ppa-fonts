@@ -4,8 +4,7 @@ Better font rendering for java. Particularly for swing applications.
 Based off this patch:
 https://gist.github.com/2963640
 
-This ppa is built via:
-https://github.com/achaphiv/ppa-fonts/blob/master/openjdk-fontfix/build_packages.sh
+This ppa is built via [build_packages.sh](build_packages.sh)
 
 Note: This ppa only updates for last LTS & release (14.04).
 
