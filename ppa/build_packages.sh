@@ -46,7 +46,7 @@ function build {
 
 	  * Ignore compiler warnings
 	  * Add infinality patch
-	  * Disable subpixel patch
+	  * Disable redundant subpixel patch
 	  * Use infinality patch
 	  * Ignore extra symbols
 
