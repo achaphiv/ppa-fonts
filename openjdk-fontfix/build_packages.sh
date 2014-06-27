@@ -33,7 +33,7 @@ function build {
 	  * Add fontfix patch
 	  * Use fontfix patch
 
-	 -- Bob Chez <no1wantdthisname@gmail.com>  $(date -R)
+	 -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
 
 	EOF
 
