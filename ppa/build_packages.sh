@@ -50,7 +50,7 @@ function build {
 	  * Use infinality patch
 	  * Ignore extra symbols
 
-	 -- Bob Chez <no1wantdthisname@gmail.com>  $(date -R)
+	 -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
 
 	EOF
 
