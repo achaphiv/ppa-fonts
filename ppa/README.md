@@ -4,8 +4,7 @@ Note: This ppa only updates for last LTS/release (14.04).
 
 # How
 
-This ppa is built via:
-https://github.com/achaphiv/ppa-fonts/blob/master/ppa/build_packages.sh
+This ppa is built via this [build script](build_packages.sh).
 
 ## Distribution <= 13.04:
 Applies infinality patches (currently 2013-05-15) against freetype.  
