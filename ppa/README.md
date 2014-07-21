@@ -56,3 +56,23 @@ sudo ppa-purge ppa:no1wantdthisname/ppa
    # Go to "Fonts"
    # I prefer Full/Rgba
    ```
+
+# Troubleshooting
+
+## My display manager stopped working
+
+Ubuntu:
+
+```
+sudo update-rc.d -f lightdm remove
+sudo update-rc.d lightdm defaults
+```
+
+Linux Mint:
+
+```
+sudo update-rc.d -f mdm remove
+sudo update-rc.d mdm defaults
+```
+
+http://askubuntu.com/questions/287606/fontconfig-infinality-causes-13-04-boot-failure
