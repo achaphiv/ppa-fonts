@@ -12,9 +12,12 @@ Best if combined with infinality patched freetype:
 https://launchpad.net/~no1wantdthisname/+archive/ppa
 
 To show how close it can get to native rendering (font is Consolas):
-idea (before): http://i.imgur.com/c2Vnahz.png
-idea (after): http://i.imgur.com/E9XVSa9.png
-eclipse: http://i.imgur.com/GmG5Ip3.png
+
+| application   | screenshot                     |
+| ------------- | ------------------------------ |
+| idea (before) | http://i.imgur.com/c2Vnahz.png |
+| idea (after)  | http://i.imgur.com/E9XVSa9.png |
+| eclipse       | http://i.imgur.com/GmG5Ip3.png |
 
 Intellij Idea 12 before (oracle jdk 1.7): http://i.imgur.com/wzVVm.png
 
