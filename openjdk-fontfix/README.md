@@ -1,8 +1,7 @@
 Better font rendering for java. Particularly for swing applications.
 
-
-
 https://launchpad.net/~no1wantdthisname/+archive/ubuntu/openjdk-fontfix
+
 # How
 Turns on `--enable-infinality` flag.
 
