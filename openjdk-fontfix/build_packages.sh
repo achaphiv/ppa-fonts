@@ -3,14 +3,13 @@
 set -ex
 
 PACKAGE='openjdk-7'
-PATCH_NAME='fontfix.patch'
-PPA_VERSION='ppa1'
 
 STARTING_DIR=$(pwd)
 
 function build {
 	DIST=$1
 	VERSION=$2
+	PPA_VERSION=$3
 
 	BUILD_DIR=build-${PACKAGE}-${DIST}
 	rm -r ${BUILD_DIR} || true
@@ -21,17 +20,14 @@ function build {
 
 	cd ${PACKAGE}*/
 
-	cp ${STARTING_DIR}/${PATCH_NAME} debian/patches/
-
-	patch -p1 < ${STARTING_DIR}/add_fontfix_patch.patch
+	patch -p1 < ${STARTING_DIR}/enable_infinality.patch
 
 	CHANGELOG=$(mktemp)
 
 	cat <<-EOF > ${CHANGELOG}
 	${PACKAGE} (${VERSION}${PPA_VERSION}) ${DIST}; urgency=low
 
-	  * Add fontfix patch
-	  * Use fontfix patch
+	  * Turn on --enable-infinality flag
 
 	 -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
 
@@ -50,6 +46,7 @@ function build {
 	cd ${STARTING_DIR}
 }
 
+
 #build precise 7u51-2.4.4-0ubuntu0.12.04.2
 #build saucy 7u51-2.4.4-0ubuntu0.13.10.1
-build trusty 7u55-2.4.7-1ubuntu1
+build trusty 7u65-2.5.1-4ubuntu1~0.14.04.1 ppa2

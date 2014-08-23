@@ -1,0 +1,11 @@
+--- before/debian/rules	2014-08-23 17:58:23.513361598 -0400
++++ after/debian/rules	2014-08-23 18:03:07.473359431 -0400
+@@ -637,7 +637,7 @@
+ endif
+ 
+ # causes corrupt bold fonts in 2.5.0
+-CONFIGURE_ARGS += --disable-infinality
++CONFIGURE_ARGS += --enable-infinality
+ 
+ ifeq ($(with_pulse),yes)
+   CONFIGURE_ARGS += --enable-pulse-java
