@@ -1,8 +1,7 @@
 Better font rendering for java. Particularly for swing applications.
 
 # How
-Based off this patch:
-https://gist.github.com/2963640
+Turns on `--enable-infinality` flag.
 
 This ppa is built via [build_packages.sh](build_packages.sh)
 
