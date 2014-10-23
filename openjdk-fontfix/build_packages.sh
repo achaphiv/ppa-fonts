@@ -47,7 +47,4 @@ function build {
 }
 
 
-#build precise 7u51-2.4.4-0ubuntu0.12.04.2
-#build saucy 7u51-2.4.4-0ubuntu0.13.10.1
-build trusty 7u65-2.5.2-3~14.04 ppa1
-#build trusty 7u65-2.5.1-4ubuntu1~0.14.04.2 ppa1
+build trusty 7u71-2.5.3-0ubuntu0.14.04.1 ppa1
