@@ -47,4 +47,4 @@ function build {
 }
 
 
-build trusty 7u71-2.5.3-0ubuntu0.14.04.1 ppa1
+build utopic 7u71-2.5.3-0ubuntu1 ppa1
