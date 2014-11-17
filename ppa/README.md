@@ -14,7 +14,7 @@ See: http://www.infinality.net/
 
 ## Distribution >= 14.04:
 Applies bohoomil's variant.  
-See: https://github.com/bohoomil/fontconfig-ultimate/blob/pkgbuild/01_freetype2-iu/infinality-2.5.3.patch
+See: https://github.com/bohoomil/fontconfig-ultimate
 
 # Java
 https://launchpad.net/~no1wantdthisname/+archive/openjdk-fontfix
