@@ -7,6 +7,12 @@ Turns on `--enable-infinality` flag.
 
 This ppa is built via [build_packages.sh](build_packages.sh)
 
+For build dependencies:
+
+```
+sudo add-get install dpkg-dev devscripts devhelper
+```
+
 Note: This ppa only updates for last LTS & release (14.04).
 
 Best if combined with infinality patched freetype:
