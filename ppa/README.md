@@ -48,6 +48,21 @@ sudo ppa-purge ppa:no1wantdthisname/ppa
 
 # Troubleshooting
 
+## Wine applications crash/don't work
+
+Grab the normal libfreetype6 from http://archive.ubuntu.com/ubuntu/pool/main/f/freetype/
+
+Unpack the shared library to $SOME_FOLDER.
+
+Then run your application with that folder preferred.
+
+E.G.
+
+```
+export LD_LIBRARY_PATH=$SOME_FOLDER
+run_some_app "$@"
+```
+
 ## My display manager stopped working
 
 Ubuntu:
