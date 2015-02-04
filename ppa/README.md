@@ -4,24 +4,6 @@ Note: This ppa only updates for last LTS/release (14.04).
 
 https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa
 
-# How
-
-This ppa is built via this [build script](build_packages.sh).
-
-For build dependencies:
-
-```
-sudo add-get install dpkg-dev devscripts devhelper
-```
-
-## Distribution <= 13.04:
-Applies infinality patches (currently 2013-05-15) against freetype.  
-See: http://www.infinality.net/
-
-## Distribution >= 14.04:
-Applies bohoomil's variant.  
-See: https://github.com/bohoomil/fontconfig-ultimate
-
 # Java
 https://launchpad.net/~no1wantdthisname/+archive/openjdk-fontfix
 
@@ -83,3 +65,21 @@ sudo update-rc.d mdm defaults
 ```
 
 http://askubuntu.com/questions/287606/fontconfig-infinality-causes-13-04-boot-failure
+
+# How
+
+This ppa is built via this [build script](build_packages.sh).
+
+For build dependencies:
+
+```
+sudo add-get install dpkg-dev devscripts devhelper
+```
+
+## Distribution <= 13.04:
+Applies infinality patches (currently 2013-05-15) against freetype.  
+See: http://www.infinality.net/
+
+## Distribution >= 14.04:
+Applies bohoomil's variant.  
+See: https://github.com/bohoomil/fontconfig-ultimate
