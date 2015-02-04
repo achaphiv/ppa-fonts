@@ -35,20 +35,6 @@ sudo apt-get update
 sudo apt-get install openjdk-7-jdk
 ```
 
-## Prefer this repository (optional)
-
-By default, security updates are preferred over this repository's packages.
-This is intentional.
-
-If you are willing to accept the possible security risk, you can always prefer this repository by adding this file.
-
-```
-$ cat /etc/apt/preferences.d/openjdk-fontfix
-Package: *
-Pin: release o=LP-PPA-no1wantdthisname-openjdk-fontfix
-Pin-Priority: 600
-```
-
 # Uninstall
 
 ```
