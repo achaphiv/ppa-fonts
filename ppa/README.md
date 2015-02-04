@@ -8,6 +8,12 @@ https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa
 
 This ppa is built via this [build script](build_packages.sh).
 
+For build dependencies:
+
+```
+sudo add-get install dpkg-dev
+```
+
 ## Distribution <= 13.04:
 Applies infinality patches (currently 2013-05-15) against freetype.  
 See: http://www.infinality.net/
