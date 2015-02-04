@@ -2,17 +2,6 @@ Better font rendering for java. Particularly for swing applications.
 
 https://launchpad.net/~no1wantdthisname/+archive/ubuntu/openjdk-fontfix
 
-# How
-Turns on `--enable-infinality` flag.
-
-This ppa is built via [build_packages.sh](build_packages.sh)
-
-For build dependencies:
-
-```
-sudo add-get install dpkg-dev devscripts devhelper
-```
-
 Note: This ppa only updates for last LTS & release (14.04).
 
 Best if combined with infinality patched freetype:
@@ -79,4 +68,15 @@ export GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 # unset GNOME_DESKTOP_SESSION_ID
 
 exec $IDEA_HOME/bin/idea.sh "$@"
+```
+
+# How
+Turns on `--enable-infinality` flag.
+
+This ppa is built via [build_packages.sh](build_packages.sh)
+
+For build dependencies:
+
+```
+sudo add-get install dpkg-dev devscripts devhelper
 ```
