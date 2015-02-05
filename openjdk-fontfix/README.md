@@ -94,3 +94,7 @@ For build dependencies:
 ```
 sudo add-get install dpkg-dev devscripts devhelper
 ```
+
+# Alternatives
+
+https://code.google.com/p/tuxjdk/
