@@ -46,6 +46,6 @@ function build {
 	cd ${STARTING_DIR}
 }
 
-build precise 7u75-2.5.4-1~precise1 ppa1
-build trusty 7u75-2.5.4-1~trusty1 ppa1
-build utopic 7u75-2.5.4-1~utopic1 ppa1
+build precise 7u75-2.5.4-1~precise1 ppa3
+build trusty 7u75-2.5.4-1~trusty1 ppa2
+build utopic 7u75-2.5.4-1~utopic1 ppa2
