@@ -59,6 +59,7 @@ Then run your application with that folder preferred.
 E.G.
 
 ```
+#!/bin/sh
 export LD_LIBRARY_PATH=$SOME_FOLDER
 run_some_app "$@"
 ```
