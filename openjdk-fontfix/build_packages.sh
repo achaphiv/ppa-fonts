@@ -2,14 +2,14 @@
 
 set -ex
 
-PACKAGE='openjdk-7'
-
 STARTING_DIR=$(pwd)
 
 function build {
-	DIST=$1
-	VERSION=$2
-	PPA_VERSION=$3
+	PACKAGE=$1
+	DIST=$2
+	VERSION=$3
+	PPA_VERSION=$4
+	PATCH=$5
 
 	BUILD_DIR=build-${PACKAGE}-${DIST}
 	rm -r ${BUILD_DIR} || true
@@ -20,7 +20,9 @@ function build {
 
 	cd ${PACKAGE}*/
 
-	patch -p1 < ${STARTING_DIR}/enable_infinality.patch
+	cp ${STARTING_DIR}/add-fontconfig-support.diff debian/patches/
+
+	patch -p1 < ${STARTING_DIR}/${PATCH}
 
 	CHANGELOG=$(mktemp)
 
@@ -46,6 +48,7 @@ function build {
 	cd ${STARTING_DIR}
 }
 
-build precise 7u75-2.5.4-1~precise1 ppa3
-build trusty 7u75-2.5.4-1~trusty1 ppa2
-build utopic 7u75-2.5.4-1~utopic1 ppa2
+#build openjdk-7 precise 7u75-2.5.4-1~precise1 ppa3 enable_infinality.patch
+#build openjdk-7 trusty 7u75-2.5.4-1~trusty1 ppa2 enable_infinality.patch
+#build openjdk-7 utopic 7u75-2.5.4-1~utopic1 ppa2 enable_infinality.patch
+build openjdk-8 utopic 8u40~b09-1 ppa1 enable_tuxjdk.patch
