@@ -12,7 +12,7 @@ function build {
 	PATCH=$5
 
 	BUILD_DIR=build-${PACKAGE}-${DIST}
-	rm -r ${BUILD_DIR} || true
+	rm -rf ${BUILD_DIR}
 	mkdir ${BUILD_DIR}
 	cd ${BUILD_DIR}
 
