@@ -1,13 +1,11 @@
 diff -Naur before/debian/rules after/debian/rules
 --- before/debian/rules	2015-04-19 21:23:38.855936164 +0000
-+++ after/debian/rules	2015-04-19 21:25:23.571540771 +0000
-@@ -466,6 +466,9 @@
- 	kfreebsd-support-hotspot.diff
- endif
- 
-+COMMON_PATCHES += \
-+	add-fontconfig-support.diff
-+
- DEFAULT_PATCHES = \
- 	$(COMMON_PATCHES) \
- 	hotspot-libpath-$(hotspot_version).diff
++++ after/debian/rules	2015-04-19 22:00:35.705961983 +0000
+@@ -386,6 +386,7 @@
+ 	icc_loading_with_symlink.diff \
+ 	icedtea-4953367.patch \
+ 	icedtea-override-redirect-compiz.patch \
++	add-fontconfig-support.diff \
+ 	jdk-freetypeScaler-crash.diff \
+ 	libpcsclite-dlopen.diff \
+ 	nonreparenting-wm.diff \
