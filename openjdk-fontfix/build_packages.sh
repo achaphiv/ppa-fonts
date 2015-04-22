@@ -48,7 +48,7 @@ function build {
 	cd ${STARTING_DIR}
 }
 
-#build openjdk-7 precise 7u75-2.5.4-1~precise1 ppa3 enable_infinality.patch
-#build openjdk-7 trusty 7u75-2.5.4-1~trusty1 ppa2 enable_infinality.patch
-#build openjdk-7 utopic 7u75-2.5.4-1~utopic1 ppa2 enable_infinality.patch
-build openjdk-8 utopic 8u40~b09-1 ppa2 enable_tuxjdk.patch
+build openjdk-7 precise 7u79-2.5.5-0ubuntu0.12.04.1 ppa1 enable_infinality.patch
+build openjdk-7 trusty 7u79-2.5.5-0ubuntu0.14.04.2 ppa1 enable_infinality.patch
+build openjdk-7 utopic 7u79-2.5.5-0ubuntu0.14.10.2 ppa1 enable_infinality.patch
+#build openjdk-8 utopic 8u40~b09-1 ppa2 enable_tuxjdk.patch
