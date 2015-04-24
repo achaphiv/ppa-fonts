@@ -92,7 +92,7 @@ This ppa is built via [build_packages.sh](build_packages.sh)
 For build dependencies:
 
 ```
-sudo add-get install dpkg-dev devscripts devhelper
+sudo apt-get install dpkg-dev devscripts devhelper
 ```
 
 # Alternatives
