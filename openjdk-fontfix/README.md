@@ -85,15 +85,27 @@ exec $IDEA_HOME/bin/idea.sh "$@"
 ```
 
 # How
-Turns on `--enable-infinality` flag.
 
-This ppa is built via [build_packages.sh](build_packages.sh)
+This ppa is built via [build_packages.sh](build_packages.sh).
 
 For build dependencies:
 
 ```
 sudo apt-get install dpkg-dev devscripts devhelper
 ```
+
+Also requires some environment variables to be set.
+
+```
+export DEBUSERNAME=John Doe
+export DEBEMAIL=foobar@whatever.com
+```
+
+## OpenJdk 7
+Turns on `--enable-infinality` flag.
+
+## OpenJdk 8
+Uses patch from [tuxjdk](https://code.google.com/p/tuxjdk/).
 
 # Alternatives
 
