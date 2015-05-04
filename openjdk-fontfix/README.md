@@ -32,7 +32,10 @@ After (this repo's openjdk and various infinality options):
 ```
 sudo add-apt-repository ppa:no1wantdthisname/openjdk-fontfix
 sudo apt-get update
+# For Java 7
 sudo apt-get install openjdk-7-jdk
+# For Java 8
+sudo apt-get install openjdk-8-jdk
 ```
 
 ## Prefer this repository (optional)
