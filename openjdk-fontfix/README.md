@@ -108,8 +108,8 @@ export DEBEMAIL=foobar@whatever.com
 Turns on `--enable-infinality` flag.
 
 ## OpenJdk 8
-Uses patch from [tuxjdk](https://code.google.com/p/tuxjdk/).
+Uses patch from [tuxjdk](https://github.com/tuxjdk/tuxjdk).
 
 # Alternatives
 
-https://code.google.com/p/tuxjdk/
+https://github.com/tuxjdk/tuxjdk
