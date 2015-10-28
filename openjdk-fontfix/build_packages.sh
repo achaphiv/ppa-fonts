@@ -56,4 +56,4 @@ function build {
 #build openjdk-7 vivid 7u85-2.6.1-5ubuntu0.15.04.1 ppa1 enable_infinality.patch
 #build openjdk-8 vivid 8u45-b14-1 ppa1 enable_tuxjdk.patch
 #build openjdk-7 wily 7u85-2.6.1-5ubuntu0.15.10.1 ppa1 enable_infinality.patch
-build openjdk-8 wily 8u66-b01-5 ppa2 enable_tuxjdk.patch
+build openjdk-8 wily 8u66-b17-1 ppa1 enable_tuxjdk.patch
