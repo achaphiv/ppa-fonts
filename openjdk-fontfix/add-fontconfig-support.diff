@@ -1,20 +1,20 @@
-Index: jdk8u-tuxjdk/jdk/make/lib/Awt2dLibraries.gmk
+Index: jdk8u60/jdk/make/lib/Awt2dLibraries.gmk
 ===================================================================
---- jdk8u-tuxjdk.orig/jdk/make/lib/Awt2dLibraries.gmk
-+++ jdk8u-tuxjdk/jdk/make/lib/Awt2dLibraries.gmk
-@@ -827,7 +827,7 @@ $(eval $(call SetupNativeCompilation,BUI
+--- jdk8u60.orig/jdk/make/lib/Awt2dLibraries.gmk
++++ jdk8u60/jdk/make/lib/Awt2dLibraries.gmk
+@@ -824,7 +824,7 @@ $(eval $(call SetupNativeCompilation,BUI
      LDFLAGS := $(subst -Xlinker -z -Xlinker defs,,$(LDFLAGS_JDKLIB)) $(LDFLAGS_CXX_JDK) \
          $(call SET_SHARED_LIBRARY_ORIGIN), \
      LDFLAGS_SUFFIX := $(BUILD_LIBFONTMANAGER_FONTLIB), \
 -    LDFLAGS_SUFFIX_linux := -lawt $(LIBM) $(LIBCXX) -ljava -ljvm -lc, \
 +    LDFLAGS_SUFFIX_linux := -lawt $(LIBM) $(LIBCXX) -ljava -ljvm -lc -lfontconfig, \
-     LDFLAGS_SUFFIX_solaris := -lawt -lawt_xawt -lc $(LIBM) $(LIBCXX) -ljava -ljvm, \
-     LDFLAGS_SUFFIX_aix := -lawt -lawt_xawt $(LIBM) $(LIBCXX) -ljava -ljvm,\
+     LDFLAGS_SUFFIX_solaris := -lawt -lawt_headless -lc $(LIBM) $(LIBCXX) -ljava -ljvm, \
+     LDFLAGS_SUFFIX_aix := -lawt -lawt_headless $(LIBM) $(LIBCXX) -ljava -ljvm,\
      LDFLAGS_SUFFIX_macosx := -lawt $(LIBM) $(LIBCXX) -undefined dynamic_lookup \
-Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
+Index: jdk8u60/jdk/src/share/native/sun/font/freetypeScaler.c
 ===================================================================
---- jdk8u-tuxjdk.orig/jdk/src/share/native/sun/font/freetypeScaler.c
-+++ jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
+--- jdk8u60.orig/jdk/src/share/native/sun/font/freetypeScaler.c
++++ jdk8u60/jdk/src/share/native/sun/font/freetypeScaler.c
 @@ -38,6 +38,10 @@
  #include FT_SIZES_H
  #include FT_OUTLINE_H
@@ -41,7 +41,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
      /* Important note:
           JNI forbids sharing same env between different threads.
           We are safe, because pointer is overwritten every time we get into
-@@ -80,8 +92,147 @@ typedef struct FTScalerContext {
+@@ -80,8 +92,146 @@ typedef struct FTScalerContext {
      int        renderFlags;   /* configuration specific to particular engine */
      int        pathType;
      int        ptsz;          /* size in points */
@@ -83,8 +83,8 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
 +    FcPattern *pattern = matchedPattern(family, ptSize);
 +
 +    int ftLoadFalgs = FT_LOAD_DEFAULT;
-+    FT_Render_Mode ftRenderMode;
-+    FT_LcdFilter ftLcdFilter;
++    FT_Render_Mode ftRenderMode = FT_RENDER_MODE_NORMAL;
++    FT_LcdFilter ftLcdFilter = FT_LCD_FILTER_DEFAULT;
 +    char horizontal = 1;
 +    FcBool b;
 +
@@ -93,33 +93,32 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
 +        ftRenderMode = FT_RENDER_MODE_NORMAL;
 +    else if (aaType == TEXT_AA_OFF)
 +        ftRenderMode = FT_RENDER_MODE_MONO;
-+    else if (FcPatternGetBool(pattern, FC_ANTIALIAS, 0, &b) == FcResultMatch)
-+        if (b) {
-+            int subpixel = FC_RGBA_UNKNOWN;
-+            if (FcPatternGetInteger(pattern, FC_RGBA, 0, &subpixel) == FcResultMatch) {
-+                if (subpixel == FC_RGBA_UNKNOWN)
-+                    subpixel = FC_RGBA_NONE;
-+                switch (subpixel) {
-+                    case FC_RGBA_NONE:
-+                        ftRenderMode = FT_RENDER_MODE_NORMAL;
-+                        break;
-+                    case FC_RGBA_RGB:
-+                    case FC_RGBA_BGR:
-+                        ftRenderMode = FT_RENDER_MODE_LCD;
-+                        horizontal = 1;
-+                        break;
-+                    case FC_RGBA_VRGB:
-+                    case FC_RGBA_VBGR:
-+                        ftRenderMode = FT_RENDER_MODE_LCD_V;
-+                        horizontal = 0;
-+                        break;
-+                    default:
-+                        break;
-+                }
-+            }
-+        } else {
++    else if (FcPatternGetBool(pattern, FC_ANTIALIAS, 0, &b) == FcResultMatch && b) {
++      int subpixel = FC_RGBA_UNKNOWN;
++      if (FcPatternGetInteger(pattern, FC_RGBA, 0, &subpixel) == FcResultMatch) {
++        if (subpixel == FC_RGBA_UNKNOWN)
++          subpixel = FC_RGBA_NONE;
++        switch (subpixel) {
++          case FC_RGBA_NONE:
 +            ftRenderMode = FT_RENDER_MODE_NORMAL;
++            break;
++          case FC_RGBA_RGB:
++          case FC_RGBA_BGR:
++            ftRenderMode = FT_RENDER_MODE_LCD;
++            horizontal = 1;
++            break;
++          case FC_RGBA_VRGB:
++          case FC_RGBA_VBGR:
++            ftRenderMode = FT_RENDER_MODE_LCD_V;
++            horizontal = 0;
++            break;
++          default:
++            break;
 +        }
++      }
++    } else {
++      ftRenderMode = FT_RENDER_MODE_NORMAL;
++    }
 +
 +    // loading mode:
 +    if (aaType == TEXT_AA_OFF)
@@ -189,7 +188,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
  #ifdef DEBUG
  /* These are referenced in the freetype sources if DEBUG macro is defined.
     To simplify work with debuging version of freetype we define
-@@ -395,6 +546,11 @@ static int setupFTContext(JNIEnv *env,
+@@ -381,6 +531,11 @@ static int setupFTContext(JNIEnv *env,
      scalerInfo->font2D = font2D;
  
      if (context != NULL) {
@@ -201,7 +200,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
          FT_Set_Transform(scalerInfo->face, &context->transform, NULL);
  
          errCode = FT_Set_Char_Size(scalerInfo->face, 0, context->ptsz, 72, 72);
-@@ -402,6 +558,9 @@ static int setupFTContext(JNIEnv *env,
+@@ -388,6 +543,9 @@ static int setupFTContext(JNIEnv *env,
          if (errCode == 0) {
              errCode = FT_Activate_Size(scalerInfo->face->size);
          }
@@ -211,7 +210,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
      }
  
      return errCode;
-@@ -687,12 +846,7 @@ Java_sun_font_FreetypeFontScaler_getGlyp
+@@ -667,12 +825,7 @@ Java_sun_font_FreetypeFontScaler_getGlyp
          JNIEnv *env, jobject scaler, jobject font2D,
          jlong pScalerContext, jlong pScaler, jint glyphCode) {
  
@@ -225,7 +224,7 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
  
      FTScalerContext* context =
          (FTScalerContext*) jlong_to_ptr(pScalerContext);
-@@ -709,53 +863,45 @@ Java_sun_font_FreetypeFontScaler_getGlyp
+@@ -689,53 +842,45 @@ Java_sun_font_FreetypeFontScaler_getGlyp
          return ptr_to_jlong(getNullGlyphImage());
      }
  
@@ -301,3 +300,4 @@ Index: jdk8u-tuxjdk/jdk/src/share/native/sun/font/freetypeScaler.c
  
      width  = (UInt16) ftglyph->bitmap.width;
      height = (UInt16) ftglyph->bitmap.rows;
+
