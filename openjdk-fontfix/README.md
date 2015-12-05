@@ -2,8 +2,6 @@ Better font rendering for java. Particularly for swing applications.
 
 https://launchpad.net/~no1wantdthisname/+archive/ubuntu/openjdk-fontfix
 
-Note: This ppa only updates for last LTS & release (14.04).
-
 Best if combined with infinality patched freetype:
 https://launchpad.net/~no1wantdthisname/+archive/ppa
 
