@@ -1,7 +1,5 @@
 Provides much better font rendering.
 
-Note: This ppa only updates for last LTS/release (14.04).
-
 https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa
 
 # Java
