@@ -8,4 +8,5 @@ deb-src http://security.ubuntu.com/ubuntu vivid-security main universe
 deb-src http://security.ubuntu.com/ubuntu wily-security main universe
 
 # Openjdk 8 trusty build
+deb-src http://ppa.launchpad.net/openjdk-r/ppa/ubuntu precise main
 deb-src http://ppa.launchpad.net/openjdk-r/ppa/ubuntu trusty main
