@@ -87,7 +87,7 @@ This ppa is built via this [build script](build_packages.sh).
 For build dependencies:
 
 ```
-sudo apt-get install dpkg-dev devscripts devhelper
+sudo apt-get install dpkg-dev devscripts debhelper
 ```
 
 ## Distribution <= 13.04:
