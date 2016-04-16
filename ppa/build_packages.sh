@@ -71,4 +71,4 @@ function build {
 #build utopic 2.5.2-2ubuntu1.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
 #build vivid 2.5.2-2ubuntu3.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
 #build wily 2.5.2-4ubuntu2 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-build xenial 2.6.1-0.1ubuntu1 '03-infinality-2.6.2-2015.12.05.patch' 'ppa1bohoomil20151205'
+build xenial 2.6.1-0.1ubuntu2 '03-infinality-2.6.1-2015.11.08.patch' 'ppa1bohoomil20151108'
