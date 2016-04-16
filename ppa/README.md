@@ -97,3 +97,7 @@ See: http://www.infinality.net/
 ## Distribution >= 14.04:
 Applies bohoomil's variant.  
 See: https://github.com/bohoomil/fontconfig-ultimate
+
+# Alternatives
+
+https://github.com/bohoomil/fontconfig-ultimate
