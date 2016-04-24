@@ -28,7 +28,7 @@ function build {
 	sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
 
 	# add/use infinality patch
-	cp ${STARTING_DIR}/${PATCH_NAME} debian/patches-freetype/
+	cp ${STARTING_DIR}/${PACKAGE}/${PATCH_NAME} debian/patches-freetype/
 	echo ${PATCH_NAME} >> debian/patches-freetype/series
 
 	# Level | Failure
