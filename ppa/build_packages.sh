@@ -2,11 +2,10 @@
 
 set -ex
 
-PACKAGE='freetype'
-
 STARTING_DIR=$(pwd)
 
-function build {
+function build_freetype {
+	PACKAGE='freetype'
 	DIST=$1
 	VERSION=$2
 	PATCH_NAME=$3
@@ -67,8 +66,56 @@ function build {
 	cd ${STARTING_DIR}
 }
 
-#build trusty 2.5.2-1ubuntu2.5 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-#build utopic 2.5.2-2ubuntu1.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-#build vivid 2.5.2-2ubuntu3.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-#build wily 2.5.2-4ubuntu2 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-build xenial 2.6.1-0.1ubuntu2 '03-infinality-2.6.1-2015.11.08.patch' 'ppa1bohoomil20151108'
+function build_fontconfig {
+	PACKAGE='fontconfig'
+	DIST=$1
+	VERSION=$2
+	PPA_VERSION=$3
+
+	BUILD_DIR=build-${PACKAGE}-${DIST}
+	rm -rf ${BUILD_DIR}
+	mkdir ${BUILD_DIR}
+	cd ${BUILD_DIR}
+
+	apt-get source ${PACKAGE}=${VERSION}
+
+	cd ${PACKAGE}*/
+
+	cp -r ${STARTING_DIR}/fontconfig-ultimate/conf.d.infinality .
+	EDITOR=/bin/true dpkg-source -q --commit . bohoomil.patch
+
+	cp -r ${STARTING_DIR}/fontconfig-ultimate/fontconfig_patches_git debian/patches/
+
+	# Patch stuff
+	sed -i -e '/00_old_diff_gz.patch/d' debian/patches/series
+	sed -i -e '/06_ubuntu_lcddefault.patch/d' debian/patches/series
+	sed -i -e '/07_no_bitmaps.patch/d' debian/patches/series
+	echo "fontconfig_patches_git/01-configure.patch" >> debian/patches/series
+	echo "fontconfig_patches_git/02-configure.ac.patch" >> debian/patches/series
+	echo "fontconfig_patches_git/03-Makefile.in.patch" >> debian/patches/series
+	echo "fontconfig_patches_git/05-Makefile.am.in.patch" >> debian/patches/series
+
+	CHANGELOG=$(mktemp)
+
+	cat <<-EOF > ${CHANGELOG}
+	${PACKAGE} (${VERSION}${PPA_VERSION}) ${DIST}; urgency=low
+
+	  * Use bohoomil\'s patches
+
+	 -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
+
+	EOF
+
+	cat debian/changelog >> ${CHANGELOG}
+
+	mv ${CHANGELOG} debian/changelog
+
+	cd ${STARTING_DIR}
+}
+
+#build_freetype trusty 2.5.2-1ubuntu2.5 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
+#build_freetype utopic 2.5.2-2ubuntu1.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
+#build_freetype vivid 2.5.2-2ubuntu3.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
+#build_freetype wily 2.5.2-4ubuntu2 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
+#build_freetype xenial 2.6.1-0.1ubuntu2 '03-infinality-2.6.1-2015.11.08.patch' 'ppa1bohoomil20151108'
+#build_fontconfig xenial 2.11.94-0ubuntu1 ppa1
