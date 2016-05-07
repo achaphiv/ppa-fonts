@@ -1,0 +1,3 @@
+[submodule "ppa/fontconfig-ultimate"]
+	path = ppa/fontconfig-ultimate
+	url = git@github.com:bohoomil/fontconfig-ultimate
