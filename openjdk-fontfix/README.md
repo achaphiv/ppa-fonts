@@ -87,12 +87,12 @@ exec $IDEA_HOME/bin/idea.sh "$@"
 
 # How
 
-This ppa is built via [build_packages.sh](build_packages.sh).
+This ppa is built via [build-all](build-all).
 
 For build dependencies:
 
 ```
-sudo apt-get install dpkg-dev devscripts devhelper
+sudo apt-get install docker-engine
 ```
 
 Also requires some environment variables to be set.
@@ -101,6 +101,8 @@ Also requires some environment variables to be set.
 export DEBUSERNAME=John Doe
 export DEBEMAIL=foobar@whatever.com
 ```
+
+Optionally a PGP key is required for signing/uploading to a PPA.
 
 ## OpenJdk 7
 Turns on `--enable-infinality` flag.
