@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -ex
+
+package=$1
+version=$2
+ppa_version=$3
+patchfile=$4
+
+dist=$(lsb_release -s -c)
+
+starting_dir=$PWD
+
+build_dir=build
+mkdir ${build_dir}
+cd ${build_dir}
+
+apt-get source ${package}=${version}
+
+cd ${package}*/
+
+cp ${starting_dir}/add-fontconfig-support.diff debian/patches/
+
+patch -p1 < ${starting_dir}/${patchfile}
+
+changelog=$(mktemp)
+
+cat <<-EOF > ${changelog}
+${package} (${version}${ppa_version}) ${dist}; urgency=low
+
+  * Turn on --enable-infinality flag
+
+ -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
+
+EOF
+
+cat debian/changelog >> ${changelog}  
+
+mv ${changelog} debian/changelog
+
+debuild -S -sd
+
+cd ../
+
+dput -c ${starting_dir}/dput.cf openjdk-fontfix *changes
