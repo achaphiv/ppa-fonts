@@ -20,7 +20,8 @@ build() {
     sh -c "cp -r /files/. . && ./build-package $package $ver $ppa_ver $patchfile"
 }
 
-build xenial openjdk-8 8u91-b14-3ubuntu1~16.04.1 ppa1 enable_tuxjdk.patch
+#build xenial openjdk-8 8u91-b14-3ubuntu1~16.04.1 ppa1 enable_tuxjdk.patch
+build wily openjdk-8 8u91-b14-3ubuntu1~15.10.1 ppa1 enable_tuxjdk.patch
 
 #build openjdk-7 precise 7u101-2.6.6-0ubuntu0.12.04.1 ppa1 enable_infinality.patch
 #build openjdk-8 precise 8u72-b15-1~precise1 ppa1 enable_tuxjdk.patch
