@@ -15,7 +15,7 @@ diff -Naur freetype-2.6.5.orig/include/freetype/config/ftoption.h freetype-2.6.5
    /*                                                                       */
  /* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  1         */
 -/* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  2         */
-+#define TT_CONFIG_OPTION_SUBPIXEL_HINTING  2
++#define TT_CONFIG_OPTION_SUBPIXEL_HINTING  1
  /* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  ( 1 | 2 ) */
  
  
