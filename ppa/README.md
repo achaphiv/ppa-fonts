@@ -93,9 +93,14 @@ sudo apt-get install dpkg-dev devscripts debhelper
 Applies infinality patches (currently 2013-05-15) against freetype.  
 See: http://www.infinality.net/
 
-## Distribution >= 14.04:
+## Distribution <= 15.10:
 Applies bohoomil's variant.  
 See: https://github.com/bohoomil/fontconfig-ultimate
+
+## Distribution >= 16.04:
+Sets freetype 2.6.4+ new option `TT_CONFIG_OPTION_SUBPIXEL_HINTING=2`.
+This is experimental for now. I may end up switching to back to bohoomil's patches.
+See: https://sourceforge.net/projects/freetype/files/freetype2/2.6.4/
 
 # Alternatives
 
