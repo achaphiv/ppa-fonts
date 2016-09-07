@@ -66,7 +66,7 @@ function build_freetype {
 	mv *.orig.tar.gz ..
 	tar xvzfp ../*.orig.tar.gz --strip-components=1
 
-	debuild -S -sd
+	debuild -S -sa
 
 	cd ../
 
