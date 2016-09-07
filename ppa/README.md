@@ -9,8 +9,7 @@ https://launchpad.net/~no1wantdthisname/+archive/openjdk-fontfix
 ```
 sudo add-apt-repository ppa:no1wantdthisname/ppa
 sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install fontconfig-infinality
+sudo apt-get install libfreetype6 fontconfig-infinality
 ```
 
 # Uninstall
