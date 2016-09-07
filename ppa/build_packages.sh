@@ -25,8 +25,9 @@ function build_freetype {
 	rm *.diff.gz
 	rm *.dsc
 
-	mv ${PACKAGE}* ${PACKAGE}-2.6.5/
+	rm ${PACKAGE}*/*.tar.bz2
 
+	mv ${PACKAGE}* ${PACKAGE}-2.6.5/
 	wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_2.6.5.orig.tar.gz
 	tar xvzfp freetype_2.6.5.orig.tar.gz
 
