@@ -19,7 +19,7 @@ apt-get source ${package}=${version}
 
 cd ${package}*/
 
-cp ${starting_dir}/add-fontconfig-support.diff debian/patches/
+cp ${starting_dir}/tuxjdk/quilt-patches/tuxjdk/add-fontconfig-support.diff debian/patches/
 
 patch -p1 < ${starting_dir}/${patchfile}
 
