@@ -1,0 +1,3 @@
+[submodule "openjdk-fontfix/tuxjdk"]
+	path = openjdk-fontfix/tuxjdk
+	url = git@github.com:tuxjdk/tuxjdk
