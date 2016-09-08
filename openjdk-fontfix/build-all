@@ -8,7 +8,7 @@ build() {
   local ver=$3
   local ppa_ver=$4
   local patchfile=$5
-  docker build -t achaphiv/openjdk-fontfix-builder:$dist -f Dockerfile-$dist .
+  docker build -t achaphiv/ppa-builder:$dist -f ../docker-builder/Dockerfile-$dist .
   docker run \
     --rm \
     -it \
