@@ -2,26 +2,8 @@
 
 set -ex
 
-build() {
-  local dist=$1
-  local package=$2
-  local ver=$3
-  local ppa_ver=$4
-  local patchfile=$5
-  docker build -t achaphiv/ppa-builder:$dist -f ../docker-builder/Dockerfile-$dist .
-  docker run \
-    --rm \
-    -it \
-    -v ~/.gnupg:/home/builder/.gnupg \
-    -v $PWD:/files \
-    -e "DEBFULLNAME=$DEBFULLNAME" \
-    -e "DEBEMAIL=$DEBEMAIL" \
-    achaphiv/openjdk-fontfix-builder:$dist \
-    sh -c "cp -r /files/. . && ./build-package $package $ver $ppa_ver $patchfile"
-}
-
 #build xenial openjdk-8 8u91-b14-3ubuntu1~16.04.1 ppa1 enable_tuxjdk.patch
-build wily openjdk-8 8u91-b14-3ubuntu1~15.10.1 ppa1 enable_tuxjdk.patch
+../docker-builder/run wily openjdk-8 8u91-b14-3ubuntu1~15.10.1 ppa1 enable_tuxjdk.patch
 
 #build openjdk-7 precise 7u101-2.6.6-0ubuntu0.12.04.1 ppa1 enable_infinality.patch
 #build openjdk-8 precise 8u72-b15-1~precise1 ppa1 enable_tuxjdk.patch
@@ -35,4 +17,3 @@ build wily openjdk-8 8u91-b14-3ubuntu1~15.10.1 ppa1 enable_tuxjdk.patch
 
 #build openjdk-7 xenial 7u95-2.6.4-1 ppa1 enable_infinality.patch
 #build openjdk-8 xenial 8u91-b14-0ubuntu4~16.04.1 ppa1 enable_tuxjdk.patch
-
