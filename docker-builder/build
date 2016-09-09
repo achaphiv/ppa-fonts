@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -ex
+
+dist=$1
+
+image=achaphiv/ppa-builder:$dist
+docker build -t $image -f ../docker-builder/Dockerfile-$dist .
+docker run \
+  --rm \
+  -it \
+  -v ~/.gnupg:/home/builder/.gnupg \
+  -v $PWD:/files \
+  -e "DEBFULLNAME=$DEBFULLNAME" \
+  -e "DEBEMAIL=$DEBEMAIL" \
+  $image \
+  sh -c "cp -r /files/. . && ${@:2}"
