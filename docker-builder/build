@@ -14,5 +14,8 @@ docker run \
   -v $PWD:/files \
   -e "DEBFULLNAME=$DEBFULLNAME" \
   -e "DEBEMAIL=$DEBEMAIL" \
+  --userns host \
+  -u $(id -u):$(id -g) \
+  -w /files \
   $image \
-  sh -c "cp -r /files/. . && $command"
+  sh -c "$command"
