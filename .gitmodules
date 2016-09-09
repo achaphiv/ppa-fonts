@@ -1,3 +1,6 @@
 [submodule "openjdk-fontfix/tuxjdk"]
 	path = openjdk-fontfix/tuxjdk
 	url = git@github.com:tuxjdk/tuxjdk
+[submodule "ppa/infinality_bundle"]
+	path = ppa/infinality_bundle
+	url = git@github.com:archfan/infinality_bundle
