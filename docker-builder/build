@@ -3,9 +3,10 @@
 set -ex
 
 dist=$1
+command="${@:2}"
 
 image=achaphiv/ppa-builder:$dist
-docker build -t $image -f ../docker-builder/Dockerfile-$dist .
+docker build -t $image -f ../docker-builder/Dockerfile-$dist ../docker-builder
 docker run \
   --rm \
   -it \
@@ -14,4 +15,4 @@ docker run \
   -e "DEBFULLNAME=$DEBFULLNAME" \
   -e "DEBEMAIL=$DEBEMAIL" \
   $image \
-  sh -c "cp -r /files/. . && ${@:2}"
+  sh -c "cp -r /files/. . && $command"
