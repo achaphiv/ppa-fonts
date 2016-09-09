@@ -3,7 +3,7 @@
 set -ex
 
 dist=$1
-command="${@:2}"
+build_command="${@:2}"
 
 image=achaphiv/ppa-builder:$dist
 docker build -t $image -f ../docker-builder/Dockerfile-$dist ../docker-builder
@@ -18,4 +18,4 @@ docker run \
   -u $(id -u):$(id -g) \
   -w /files \
   $image \
-  sh -c "$command"
+  sh -c "$build_command"
