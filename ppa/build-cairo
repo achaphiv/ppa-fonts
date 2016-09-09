@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -ex
+
+starting_dir=$(pwd)
+
+version=$1
+ppa_version=$2
+
+package='cairo'
+dist=$(lsb_release -s -c)
+
+new_version=${version}${ppa_version}
+
+build_dir=build-${package}-${dist}
+rm -rf ${build_dir}
+mkdir ${build_dir}
+cd ${build_dir}
+
+apt-get source ${package}=${version}
+
+cd ${package}*/
+
+for patch in $starting_dir/infinality_bundle/03_cairo-iu/*.patch; do
+  cp $patch debian/patches
+  echo $(basename $patch) >> debian/patches/series
+done
+
+changelog=$(mktemp)
+
+cat <<-EOF > ${changelog}
+${package} (${new_version}) ${dist}; urgency=low
+
+  * Add patches
+
+ -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
+
+EOF
+
+cat debian/changelog >> ${changelog}
+
+mv ${changelog} debian/changelog
+
+debuild -S -sd
+
+cd ../
+
+dput -c ${starting_dir}/dput.cf ppa *changes
+
+cd ${starting_dir}
