@@ -2,41 +2,40 @@
 
 set -ex
 
-STARTING_DIR=$(pwd)
+starting_dir=$(pwd)
 
-PACKAGE='freetype'
-DIST=$1
-VERSION=$2
-PATCH_NAME=$3
-PPA_VERSION=$4
+version=$1
+ppa_version=$2
 
-NEW_VERSION=2.6.5-0ubuntu0${PPA_VERSION}
+package='freetype'
+dist=$(lsb_release -s -c)
+new_version=2.6.5-0ubuntu0${ppa_version}
 
-BUILD_DIR=build-${PACKAGE}-${DIST}
-rm -rf ${BUILD_DIR}
-mkdir ${BUILD_DIR}
-cd ${BUILD_DIR}
+build_dir=build-${package}-${dist}
+rm -rf ${build_dir}
+mkdir ${build_dir}
+cd ${build_dir}
 
-apt-get source ${PACKAGE}=${VERSION}
+apt-get source ${package}=${version}
 
 # Remove old packages
 rm *.orig.tar.gz
 rm *.diff.gz
 rm *.dsc
 
-rm ${PACKAGE}*/*.tar.bz2
+rm ${package}*/*.tar.bz2
 
-mv ${PACKAGE}* ${PACKAGE}-2.6.5/
+mv ${package}* ${package}-2.6.5/
 wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_2.6.5.orig.tar.gz
 tar xvzfp freetype_2.6.5.orig.tar.gz
 
-cd ${PACKAGE}*/
+cd ${package}*/
 
 # ignore compiler warnings
 sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
 
-cp ${STARTING_DIR}/${PACKAGE}/${PATCH_NAME} debian/patches-freetype/
-echo ${PATCH_NAME} >> debian/patches-freetype/series
+cp ${starting_dir}/infinality_bundle/01_freetype2-iu/0002-infinality-2.6.5-2016.08.18.patch debian/patches-freetype/
+echo 0002-infinality-2.6.5-2016.08.18.patch >> debian/patches-freetype/series
 
 # Redundant
 sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
@@ -56,10 +55,12 @@ sed -i -e 's/DPKG_GENSYMBOLS_CHECK_LEVEL = 4/DPKG_GENSYMBOLS_CHECK_LEVEL = 0/' d
 CHANGELOG=$(mktemp)
 
 cat <<-EOF > ${CHANGELOG}
-${PACKAGE} (${NEW_VERSION}) ${DIST}; urgency=low
+${package} (${new_version}) ${dist}; urgency=low
 
   * Ignore compiler warnings
   * Update freetype to 2.6.5
+  * Remove unnecessary patches
+  * Add infinality patch
   * Ignore extra symbols
 
  -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
@@ -74,6 +75,6 @@ debuild -S -sd
 
 cd ../
 
-dput -c ${STARTING_DIR}/dput.cf ppa *changes
+dput -c ${starting_dir}/dput.cf ppa *changes
 
-cd ${STARTING_DIR}
+cd ${starting_dir}
