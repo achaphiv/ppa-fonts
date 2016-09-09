@@ -37,6 +37,10 @@ sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
 cp ${starting_dir}/infinality_bundle/01_freetype2-iu/0002-infinality-2.6.5-2016.08.18.patch debian/patches-freetype/
 echo 0002-infinality-2.6.5-2016.08.18.patch >> debian/patches-freetype/series
 
+# Resolve conflict caused by infinality
+sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
+echo "freetype-2.1.7-backwards.compat.patch -F3 -p0" >> debian/patches-freetype/series
+
 # Redundant
 sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
 
