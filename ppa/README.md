@@ -65,7 +65,7 @@ http://askubuntu.com/questions/287606/fontconfig-infinality-causes-13-04-boot-fa
 
 # How
 
-This ppa is built via this [build script](build_packages.sh).
+This ppa is built via this [build script](build-all).
 
 For build dependencies:
 
