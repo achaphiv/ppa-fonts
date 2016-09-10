@@ -15,6 +15,17 @@ starting_dir=$(pwd)
 build_dir=$starting_dir/build-${package}-${dist}
 working_dir=$build_dir/${package}-${updated_version}
 
+main() {
+  remove_old_build
+  create_working_dir
+  fix_patches
+  ignore_issues
+  update_changelog
+  generate_package_from_ppa_archive || generate_package_from_official_archive
+  upload_package_to_ppa
+  cd $starting_dir
+}
+
 remove_old_build() {
   rm -rf ${build_dir}
   mkdir ${build_dir}
@@ -103,21 +114,13 @@ generate_package_from_official_archive() {
   cd $working_dir
   gpg --recv-keys E707FDA5
   ./debian/rules get-orig-source
+  tar xvzfp *.orig.tar.gz --strip-components=1
   mv *.orig.tar.gz ..
-  tar xvzfp ../*.orig.tar.gz --strip-components=1
   debuild -S -sa
 }
 
 upload_package_to_ppa() {
-  cd $build_dir
-  dput -c ${starting_dir}/dput.cf ppa *changes
+  dput -c ${starting_dir}/dput.cf ppa $build_dir/*changes
 }
 
-remove_old_build
-create_working_dir
-fix_patches
-ignore_issues
-update_changelog
-generate_package_from_ppa_archive || generate_package_from_official_archive
-upload_package_to_ppa
-cd $starting_dir
+main
