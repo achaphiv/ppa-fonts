@@ -5,15 +5,15 @@ set -ex
 version=$1
 ppa_version=$2
 
-package='freetype'
+package=freetype
 dist=$(lsb_release -s -c)
 
 updated_version=2.7
 new_version=${updated_version}-0ubuntu0${ppa_version}
 
 starting_dir=$(pwd)
-build_dir=$starting_dir/build-${package}-${dist}
-working_dir=$build_dir/${package}-${updated_version}
+build_dir=${starting_dir}/build-${package}-${dist}
+working_dir=${build_dir}/${package}-${updated_version}
 
 main() {
   remove_old_build
@@ -23,7 +23,7 @@ main() {
   update_changelog
   generate_package_from_ppa_archive || generate_package_from_official_archive
   upload_package_to_ppa
-  cd $starting_dir
+  cd ${starting_dir}
 }
 
 remove_old_build() {
@@ -45,7 +45,7 @@ create_working_dir() {
 }
 
 fix_patches() {
-  cd $working_dir
+  cd ${working_dir}
 
   add_patch() {
     local patch_name=$1
@@ -70,7 +70,7 @@ fix_patches() {
 }
 
 ignore_issues() {
-  cd $working_dir
+  cd ${working_dir}
   # ignore compiler warnings
   sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
   # Level | Failure
@@ -83,10 +83,10 @@ ignore_issues() {
 }
 
 update_changelog() {
-  cd $working_dir
-  CHANGELOG=$(mktemp)
+  cd ${working_dir}
+  changelog=$(mktemp)
 
-  cat <<EOF | sed 's/^  //' > ${CHANGELOG}
+  cat <<EOF | sed 's/^  //' > ${changelog}
   ${package} (${new_version}) ${dist}; urgency=low
 
     * Ignore compiler warnings
@@ -98,20 +98,20 @@ update_changelog() {
    -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
 
 EOF
-  cat debian/changelog >> ${CHANGELOG}
-  mv ${CHANGELOG} debian/changelog
+  cat debian/changelog >> ${changelog}
+  mv ${changelog} debian/changelog
 }
 
 generate_package_from_ppa_archive() {
-  cd $build_dir
+  cd ${build_dir}
   wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${updated_version}.orig.tar.gz || return 1
   tar xvzfp freetype_${updated_version}.orig.tar.gz
-  cd $working_dir
+  cd ${working_dir}
   debuild -S -sd
 }
 
 generate_package_from_official_archive() {
-  cd $working_dir
+  cd ${working_dir}
   gpg --recv-keys E707FDA5
   ./debian/rules get-orig-source
   tar xvzfp *.orig.tar.gz --strip-components=1
@@ -120,7 +120,7 @@ generate_package_from_official_archive() {
 }
 
 upload_package_to_ppa() {
-  dput -c ${starting_dir}/dput.cf ppa $build_dir/*changes
+  dput -c ${starting_dir}/dput.cf ppa ${build_dir}/*changes
 }
 
 main
