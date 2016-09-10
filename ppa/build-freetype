@@ -2,8 +2,6 @@
 
 set -ex
 
-starting_dir=$(pwd)
-
 version=$1
 ppa_version=$2
 
@@ -13,90 +11,105 @@ dist=$(lsb_release -s -c)
 updated_version=2.7
 new_version=${updated_version}-0ubuntu0${ppa_version}
 
-build_dir=build-${package}-${dist}
-rm -rf ${build_dir}
-mkdir ${build_dir}
-cd ${build_dir}
+starting_dir=$(pwd)
+build_dir=$starting_dir/${package}-${dist}
+working_dir=$build_dir/${package}-${updated_version}
 
-apt-get source ${package}=${version}
+remove_old_build() {
+	rm -rf ${build_dir}
+	mkdir ${build_dir}
+}
 
-# Remove old packages
-rm *.orig.tar.gz
-rm *.diff.gz
-rm *.dsc
+create_working_dir() {
+	cd ${build_dir}
+	apt-get source ${package}=${version}
 
-rm ${package}*/*.tar.bz2
+	# Remove old packages
+	rm *.orig.tar.gz
+	rm *.diff.gz
+	rm *.dsc
+	rm ${package}*/*.tar.bz2
 
-mv ${package}* ${package}-${updated_version}/
+	mv ${package}* ${package}-${updated_version}/
+}
 
-cd ${package}*/
+fix_patches() {
+	cd $working_dir
+	patch_name=0002-infinality-2.7-2016.09.09.patch
+	cp ${starting_dir}/infinality_bundle/01_freetype2-iu/$patch_name debian/patches-freetype/
+	echo $patch_name >> debian/patches-freetype/series
 
-# ignore compiler warnings
-sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
+	# Resolve conflict caused by infinality
+	sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
+	echo "freetype-2.1.7-backwards.compat.patch -F3 -p0" >> debian/patches-freetype/series
 
-patch_name=0002-infinality-2.7-2016.09.09.patch
-cp ${starting_dir}/infinality_bundle/01_freetype2-iu/$patch_name debian/patches-freetype/
-echo $patch_name >> debian/patches-freetype/series
+	# Redundant
+	sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
 
-# Resolve conflict caused by infinality
-sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
-echo "freetype-2.1.7-backwards.compat.patch -F3 -p0" >> debian/patches-freetype/series
+	# remove since updated version changes things
+	sed -i -e '/0001-Revert-pcf-Signedness-fixes.patch/d' debian/patches-freetype/series
+	sed -i -e '/compiler_hardening_fixes.patch/d' debian/patches-ft2demos/series
+}
 
-# Redundant
-sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
+ignore_issues() {
+	cd $working_dir
+	# ignore compiler warnings
+	sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
+	# Level | Failure
+	# 0     | impossible (all checks disabled)
+	# 1     | symbols have disappeared
+	# 2     | symbols have been introduced
+	# 3     | libraries have disappeared
+	# 4     | libraries have been introduced
+	sed -i -e 's/DPKG_GENSYMBOLS_CHECK_LEVEL = 4/DPKG_GENSYMBOLS_CHECK_LEVEL = 0/' debian/rules
+}
 
-# remove since updated version changes things
-sed -i -e '/0001-Revert-pcf-Signedness-fixes.patch/d' debian/patches-freetype/series
-sed -i -e '/compiler_hardening_fixes.patch/d' debian/patches-ft2demos/series
+update_changelog() {
+	cd $working_dir
+	CHANGELOG=$(mktemp)
+	cat <<-EOF > ${CHANGELOG}
+	${package} (${new_version}) ${dist}; urgency=low
 
-# Level | Failure
-# 0     | impossible (all checks disabled)
-# 1     | symbols have disappeared
-# 2     | symbols have been introduced
-# 3     | libraries have disappeared
-# 4     | libraries have been introduced
-sed -i -e 's/DPKG_GENSYMBOLS_CHECK_LEVEL = 4/DPKG_GENSYMBOLS_CHECK_LEVEL = 0/' debian/rules
+	  * Ignore compiler warnings
+	  * Update freetype to ${updated_version}
+	  * Remove unnecessary patches
+	  * Add infinality patch
+	  * Ignore extra symbols
 
-CHANGELOG=$(mktemp)
-
-cat <<-EOF > ${CHANGELOG}
-${package} (${new_version}) ${dist}; urgency=low
-
-  * Ignore compiler warnings
-  * Update freetype to ${updated_version}
-  * Remove unnecessary patches
-  * Add infinality patch
-  * Ignore extra symbols
-
- -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
+	 -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
 
 EOF
-
-cat debian/changelog >> ${CHANGELOG}
-
-mv ${CHANGELOG} debian/changelog
-
-get_orig_source_from_ppa() {
-  cd ${starting_dir}/${build_dir}/
-  wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${updated_version}.orig.tar.gz || return 1
-  tar xvzfp freetype_${updated_version}.orig.tar.gz
-  cd ${package}*/
-  debuild -S -sd
+	cat debian/changelog >> ${CHANGELOG}
+	mv ${CHANGELOG} debian/changelog
 }
 
-get_orig_source_from_official() {
-  cd ${starting_dir}/${build_dir}/${package}*/
-  gpg --recv-keys E707FDA5
-  ./debian/rules get-orig-source
-  mv *.orig.tar.gz ..
-  tar xvzfp ../*.orig.tar.gz --strip-components=1
-  debuild -S -sa
+generate_package_from_ppa_archive() {
+	cd $build_dir
+	wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${updated_version}.orig.tar.gz || return 1
+	tar xvzfp freetype_${updated_version}.orig.tar.gz
+	cd $working_dir
+	debuild -S -sd
 }
 
-get_orig_source_from_ppa || get_orig_source_from_official
+generate_package_from_official_archive() {
+	cd $working_dir
+	gpg --recv-keys E707FDA5
+	./debian/rules get-orig-source
+	mv *.orig.tar.gz ..
+	tar xvzfp ../*.orig.tar.gz --strip-components=1
+	debuild -S -sa
+}
 
-cd ../
+upload_package_to_ppa() {
+	cd $build_dir
+  dput -c ${starting_dir}/dput.cf ppa *changes
+}
 
-dput -c ${starting_dir}/dput.cf ppa *changes
-
-cd ${starting_dir}
+remove_old_build
+create_working_dir
+fix_patches
+ignore_issues
+update_changelog
+generate_package_from_ppa_archive || generate_package_from_official_archive
+upload_package_to_ppa
+cd $starting_dir
