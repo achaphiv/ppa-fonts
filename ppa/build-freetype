@@ -12,7 +12,7 @@ updated_version=2.7
 new_version=${updated_version}-0ubuntu0${ppa_version}
 
 starting_dir=$(pwd)
-build_dir=$starting_dir/${package}-${dist}
+build_dir=$starting_dir/build-${package}-${dist}
 working_dir=$build_dir/${package}-${updated_version}
 
 remove_old_build() {
