@@ -9,7 +9,9 @@ ppa_version=$2
 
 package='freetype'
 dist=$(lsb_release -s -c)
-new_version=2.6.5-0ubuntu0${ppa_version}
+
+updated_version=2.6.5
+new_version=${updated_version}-0ubuntu0${ppa_version}
 
 build_dir=build-${package}-${dist}
 rm -rf ${build_dir}
@@ -25,17 +27,17 @@ rm *.dsc
 
 rm ${package}*/*.tar.bz2
 
-mv ${package}* ${package}-2.6.5/
-wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_2.6.5.orig.tar.gz
-tar xvzfp freetype_2.6.5.orig.tar.gz
+mv ${package}* ${package}-${updated_version}/
+wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${updated_version}.orig.tar.gz
+tar xvzfp freetype_${updated_version}.orig.tar.gz
 
 cd ${package}*/
 
 # ignore compiler warnings
 sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
 
-cp ${starting_dir}/infinality_bundle/01_freetype2-iu/0002-infinality-2.6.5-2016.08.18.patch debian/patches-freetype/
-echo 0002-infinality-2.6.5-2016.08.18.patch >> debian/patches-freetype/series
+cp ${starting_dir}/infinality_bundle/01_freetype2-iu/0002-infinality-${updated_version}-2016.08.18.patch debian/patches-freetype/
+echo 0002-infinality-${updated_version}-2016.08.18.patch >> debian/patches-freetype/series
 
 # Resolve conflict caused by infinality
 sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
@@ -44,7 +46,7 @@ echo "freetype-2.1.7-backwards.compat.patch -F3 -p0" >> debian/patches-freetype/
 # Redundant
 sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
 
-# remove since 2.6.5 changes things
+# remove since updated version changes things
 sed -i -e '/0001-Revert-pcf-Signedness-fixes.patch/d' debian/patches-freetype/series
 sed -i -e '/compiler_hardening_fixes.patch/d' debian/patches-ft2demos/series
 
@@ -62,7 +64,7 @@ cat <<-EOF > ${CHANGELOG}
 ${package} (${new_version}) ${dist}; urgency=low
 
   * Ignore compiler warnings
-  * Update freetype to 2.6.5
+  * Update freetype to ${updated_version}
   * Remove unnecessary patches
   * Add infinality patch
   * Ignore extra symbols
