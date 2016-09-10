@@ -10,7 +10,7 @@ ppa_version=$2
 package='freetype'
 dist=$(lsb_release -s -c)
 
-updated_version=2.6.5
+updated_version=2.7
 new_version=${updated_version}-0ubuntu0${ppa_version}
 
 build_dir=build-${package}-${dist}
@@ -28,16 +28,14 @@ rm *.dsc
 rm ${package}*/*.tar.bz2
 
 mv ${package}* ${package}-${updated_version}/
-wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${updated_version}.orig.tar.gz
-tar xvzfp freetype_${updated_version}.orig.tar.gz
 
 cd ${package}*/
 
 # ignore compiler warnings
 sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
 
-cp ${starting_dir}/infinality_bundle/01_freetype2-iu/0002-infinality-${updated_version}-2016.08.18.patch debian/patches-freetype/
-echo 0002-infinality-${updated_version}-2016.08.18.patch >> debian/patches-freetype/series
+cp ${starting_dir}/infinality_bundle/01_freetype2-iu/*infinality-*.patch debian/patches-freetype/
+echo *infinality-*.patch >> debian/patches-freetype/series
 
 # Resolve conflict caused by infinality
 sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
@@ -77,7 +75,24 @@ cat debian/changelog >> ${CHANGELOG}
 
 mv ${CHANGELOG} debian/changelog
 
-debuild -S -sd
+get_orig_source_from_ppa() {
+  cd ${starting_dir}/${build_dir}/
+  wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${updated_version}.orig.tar.gz || return 1
+  tar xvzfp freetype_${updated_version}.orig.tar.gz
+  cd ${package}*/
+  debuild -S -sd
+}
+
+get_orig_source_from_official() {
+  cd ${starting_dir}/${build_dir}/${package}*/
+  gpg --recv-keys E707FDA5
+  ./debian/rules get-orig-source
+  mv *.orig.tar.gz ..
+  tar xvzfp ../*.orig.tar.gz --strip-components=1
+  debuild -S -sa
+}
+
+get_orig_source_from_ppa || get_orig_source_from_official
 
 cd ../
 

@@ -8,4 +8,4 @@
 #build_fontconfig xenial 2.11.94-0ubuntu1 ppa1
 
 #../docker-builder/run xenial ./build-cairo 1.14.6-1 ubuntu0ppa1
-../docker-builder/run xenial ./build-freetype 2.6.1-0.1ubuntu2 'ppa10'
+../docker-builder/run xenial ./build-freetype 2.6.1-0.1ubuntu2 'ppa1'
