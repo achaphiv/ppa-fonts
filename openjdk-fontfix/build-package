@@ -11,7 +11,7 @@ dist=$(lsb_release -s -c)
 
 starting_dir=$PWD
 
-build_dir=build
+build_dir=build-${package}-${dist}
 mkdir ${build_dir}
 cd ${build_dir}
 
