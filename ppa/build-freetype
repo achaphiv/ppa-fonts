@@ -56,6 +56,9 @@ fix_patches() {
   add_patch 0001-Enable-table-validation-modules.patch
   add_patch 0002-infinality-2.7-2016.09.09.patch
 
+  # FIXME: temporary hack to actually enable FT_CONFIG_OPTION_INFINALITY_PATCHSET
+  sed -i -e 's/+#define TT_CONFIG_OPTION_SUBPIXEL_HINTING  1/+#define FT_CONFIG_OPTION_INFINALITY_PATCHSET/' debian/patches-freetype/0002-infinality-2.7-2016.09.09.patch
+
   # Resolve conflict caused by infinality
   sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
   echo "freetype-2.1.7-backwards.compat.patch -F3 -p0" >> debian/patches-freetype/series
