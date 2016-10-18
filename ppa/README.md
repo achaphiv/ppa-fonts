@@ -74,11 +74,11 @@ sudo apt-get install dpkg-dev devscripts debhelper
 ```
 
 ## Distribution <= 13.04:
-Applies infinality patches (currently 2013-05-15) against freetype.  
+Applies infinality patches (currently 2013-05-15) against freetype.
 See: http://www.infinality.net/
 
 ## Distribution <= 15.10:
-Applies bohoomil's variant.  
+Applies bohoomil's variant.
 See: https://github.com/bohoomil/fontconfig-ultimate
 
 ## Distribution >= 16.04:
