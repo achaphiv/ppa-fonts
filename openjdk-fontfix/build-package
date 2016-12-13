@@ -39,6 +39,7 @@ cat debian/changelog >> ${changelog}
 
 mv ${changelog} debian/changelog
 
+eval $(gpg-agent --daemon)
 debuild -S -sd
 
 cd ../
