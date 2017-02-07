@@ -18,6 +18,6 @@ set -ex
 #../docker-builder/run precise ./build-package openjdk-7 7u121-2.6.8-1ubuntu0.12.04.1 ppa1 enable_infinality.patch
 #../docker-builder/run trusty ./build-package openjdk-7 7u121-2.6.8-1ubuntu0.14.04.1 ppa1 enable_infinality.patch
 #../docker-builder/run wily openjdk-8 8u91-b14-3ubuntu1~15.10.1 ppa1 enable_tuxjdk.patch
-../docker-builder/run xenial ./build-package openjdk-8 8u111-b14-2ubuntu0.16.04.2 ppa1 enable_tuxjdk.patch
+../docker-builder/run xenial ./build-package openjdk-8 8u121-b13-0ubuntu1.16.04.2 ppa1 enable_tuxjdk.patch
 
-../docker-builder/run yakkety ./build-package openjdk-8 8u111-b14-2ubuntu0.16.10.2 ppa1 enable_tuxjdk.patch
+../docker-builder/run yakkety ./build-package openjdk-8 8u121-b13-0ubuntu1.16.10.2 ppa1 enable_tuxjdk.patch
