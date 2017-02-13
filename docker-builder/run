@@ -6,7 +6,7 @@ dist=$1
 build_command="${@:2}"
 
 image=achaphiv/ppa-builder:$dist
-docker build -t $image -f ../docker-builder/Dockerfile-$dist ../docker-builder
+docker build --pull -t $image -f ../docker-builder/Dockerfile-$dist ../docker-builder
 docker run \
   --rm \
   -it \
