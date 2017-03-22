@@ -70,7 +70,7 @@ This ppa is built via this [build script](build-all).
 For build dependencies:
 
 ```
-sudo apt-get install dpkg-dev devscripts debhelper
+sudo apt-get install docker-engine
 ```
 
 ## Distribution <= 13.04:
