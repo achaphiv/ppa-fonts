@@ -8,7 +8,7 @@ ppa_version=$2
 package=freetype
 dist=$(lsb_release -s -c)
 
-updated_version=2.7
+updated_version=2.7.1
 new_version=${updated_version}-0ubuntu0${ppa_version}
 
 starting_dir=$(pwd)
@@ -127,3 +127,4 @@ upload_package_to_ppa() {
 }
 
 main
+
