@@ -67,7 +67,7 @@ fix_patches() {
   # remove since updated version changes things
   sed -i -e '/0001-Revert-pcf-Signedness-fixes.patch/d' debian/patches-freetype/series
   sed -i -e '/revert_scalable_fonts_metric.patch/d' debian/patches-freetype/series
-  sed -i -e '/CVE-2014-2240.patch/d' debian/patches-freetype/series
+  sed -i -e '/CVE-2014-/d' debian/patches-freetype/series
   sed -i -e '/compiler_hardening_fixes.patch/d' debian/patches-ft2demos/series
 }
 
