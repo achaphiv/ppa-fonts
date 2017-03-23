@@ -7,10 +7,10 @@
 #build xenial ./build-freetype 2.6.1-0.1ubuntu2 'enable-subpixel-hinting.patch' 'ppa8'
 #build_fontconfig xenial 2.11.94-0ubuntu1 ppa1
 
-../docker-builder/run trusty ./build-freetype 2.5.2-1ubuntu2.6 '.14.04.3ppa1'
+#../docker-builder/run trusty ./build-freetype 2.5.2-1ubuntu2.6 '.14.04.3ppa1'
 
 #../docker-builder/run xenial ./build-cairo 1.14.6-1 ubuntu0ppa1
-#../docker-builder/run xenial ./build-freetype 2.6.1-0.1ubuntu2 'ppa4'
+../docker-builder/run xenial ./build-freetype 2.6.1-0.1ubuntu2 '.16.04.2ppa1'
 
 #../docker-builder/run yakkety ./build-cairo 1.14.6-1build1 ubuntu0ppa1
-#../docker-builder/run yakkety ./build-freetype 2.6.3-3ubuntu1 'ppa5'
+../docker-builder/run yakkety ./build-freetype 2.6.3-3ubuntu1 '.16.10.2ppa1'
