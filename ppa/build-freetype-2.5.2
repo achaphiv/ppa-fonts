@@ -8,11 +8,12 @@ ppa_version=$2
 package=freetype
 dist=$(lsb_release -s -c)
 
+freetype_version=${version%-*ubuntu*}
 new_version=${version}${ppa_version}
 
 starting_dir=$(pwd)
 build_dir=${starting_dir}/build-${package}-${dist}
-working_dir=${build_dir}/${package}-${version%-*ubuntu*}
+working_dir=${build_dir}/${package}-${freetype_version}
 
 main() {
   remove_old_build
@@ -20,7 +21,7 @@ main() {
   fix_patches
   ignore_issues
   update_changelog
-  generate_package_from_official_archive
+  generate_package_from_ppa_archive || generate_package_from_official_archive
   upload_package_to_ppa
   cd ${starting_dir}
 }
@@ -85,6 +86,14 @@ update_changelog() {
 EOF
   cat debian/changelog >> ${changelog}
   mv ${changelog} debian/changelog
+}
+
+generate_package_from_ppa_archive() {
+  cd ${build_dir}
+  wget https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${freetype_version}.orig.tar.gz || return 1
+  tar xvzfp freetype_${freetype_version}.orig.tar.gz
+  cd ${working_dir}
+  debuild -S -sd -pgpg2
 }
 
 generate_package_from_official_archive() {
