@@ -4,3 +4,6 @@
 [submodule "ppa/infinality_bundle"]
 	path = ppa/infinality_bundle
 	url = git@github.com:archfan/infinality_bundle
+[submodule "ppa/patches-freetype-2.5.2"]
+	path = ppa/patches-freetype-2.5.2
+	url = git@github.com:bohoomil/fontconfig-ultimate
