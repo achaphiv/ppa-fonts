@@ -1,0 +1,103 @@
+#!/bin/bash
+
+set -ex
+
+version=$1
+ppa_version=$2
+
+package=freetype
+dist=$(lsb_release -s -c)
+
+new_version=${version}${ppa_version}
+
+starting_dir=$(pwd)
+build_dir=${starting_dir}/build-${package}-${dist}
+working_dir=${build_dir}/${package}-${version%-*ubuntu*}
+
+main() {
+  remove_old_build
+  create_working_dir
+  fix_patches
+  ignore_issues
+  update_changelog
+  generate_package_from_official_archive
+  upload_package_to_ppa
+  cd ${starting_dir}
+}
+
+remove_old_build() {
+  rm -rf ${build_dir}
+  mkdir ${build_dir}
+}
+
+create_working_dir() {
+  cd ${build_dir}
+  apt-get source ${package}=${version}
+}
+
+fix_patches() {
+  cd ${working_dir}
+
+  add_patch() {
+    local patch_name=$1
+    cp ${starting_dir}/patches-freetype-2.5.2/01_freetype2-iu/$patch_name debian/patches-freetype/
+    echo $patch_name >> debian/patches-freetype/series
+  }
+
+  add_patch infinality-2.5.3.patch
+
+  # Resolve conflict caused by infinality
+  sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
+  echo "freetype-2.1.7-backwards.compat.patch -F3 -p0" >> debian/patches-freetype/series
+
+  # Redundant
+  sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
+  sed -i -e '/enable-gxvalid-otvalid.patch/d' debian/patches-freetype/series
+}
+
+ignore_issues() {
+  cd ${working_dir}
+  # ignore compiler warnings
+  sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
+  # Level | Failure
+  # 0     | impossible (all checks disabled)
+  # 1     | symbols have disappeared
+  # 2     | symbols have been introduced
+  # 3     | libraries have disappeared
+  # 4     | libraries have been introduced
+  sed -i -e 's/DPKG_GENSYMBOLS_CHECK_LEVEL = 4/DPKG_GENSYMBOLS_CHECK_LEVEL = 0/' debian/rules
+}
+
+update_changelog() {
+  cd ${working_dir}
+  changelog=$(mktemp)
+
+  cat <<EOF | sed 's/^  //' > ${changelog}
+  ${package} (${new_version}) ${dist}; urgency=low
+
+    * Ignore compiler warnings
+    * Remove unnecessary patches
+    * Add infinality patch
+    * Ignore extra symbols
+
+   -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
+
+EOF
+  cat debian/changelog >> ${changelog}
+  mv ${changelog} debian/changelog
+}
+
+generate_package_from_official_archive() {
+  cd ${working_dir}
+  gpg --recv-keys E707FDA5
+  ./debian/rules get-orig-source
+  tar xvzfp *.orig.tar.gz --strip-components=1
+  mv *.orig.tar.gz ..
+  debuild -S -sa -pgpg2
+}
+
+upload_package_to_ppa() {
+  dput -c ${starting_dir}/dput.cf ppa ${build_dir}/*changes
+}
+
+main
