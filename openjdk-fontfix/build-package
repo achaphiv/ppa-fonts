@@ -1,22 +1,17 @@
 #!/bin/bash
 
-set -ex
+set -exo pipefail
 
 package=$1
 version=$2
-ppa_version=$3
-patchfile=$4
-
-dist=$(lsb_release -s -c)
+dist=$3
+ppa_version=$4
+patchfile=$5
 
 starting_dir=$PWD
 
 build_dir=build-${package}-${dist}
-rm -rf $build_dir
-mkdir ${build_dir}
 cd ${build_dir}
-
-apt-get source ${package}=${version}
 
 cd ${package}*/
 
@@ -40,6 +35,8 @@ cat debian/changelog >> ${changelog}
 mv ${changelog} debian/changelog
 
 debuild -S -sd -pgpg2
+
+ps ax | grep gpg-agent | grep -v grep | awk '{print $1}' | xargs kill
 
 cd ../
 

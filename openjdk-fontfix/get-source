@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -ex
+
+package=$1
+version=$2
+
+dist=$(lsb_release -s -c)
+
+build_dir=build-${package}-${dist}
+rm -rf $build_dir
+mkdir ${build_dir}
+cd ${build_dir}
+
+apt-get source ${package}=${version}
