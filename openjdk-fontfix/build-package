@@ -36,7 +36,7 @@ mv ${changelog} debian/changelog
 
 debuild -S -sd -pgpg2
 
-ps ax | grep gpg-agent | grep -v grep | awk '{print $1}' | xargs kill
+ps ax | grep gpg-agent | grep -v grep | awk '{print $1}' | xargs kill || true
 
 cd ../
 
