@@ -22,5 +22,5 @@ set -ex
 
 #../docker-builder/run yakkety ./build-package openjdk-8 8u121-b13-0ubuntu1.16.10.2 ppa1 enable_tuxjdk.patch
 
-../docker-builder/run zesty ./get-source openjdk-8 8u121-b13-4
-../docker-builder/run yakkety ./build-package openjdk-8 8u121-b13-4 zesty ppa1 enable_tuxjdk.patch
+../docker-builder/run zesty ./get-source openjdk-8 8u131-b11-0ubuntu1.17.04.1
+../docker-builder/run yakkety ./build-package openjdk-8 8u131-b11-0ubuntu1.17.04.1 zesty ppa1 enable_tuxjdk.patch
