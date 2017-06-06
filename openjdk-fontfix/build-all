@@ -22,6 +22,15 @@ set -ex
 
 #../docker-builder/run yakkety ./build-package openjdk-8 8u121-b13-0ubuntu1.16.10.2 ppa1 enable_tuxjdk.patch
 
+build_openjdk_7() {
+  local dist=$1
+  local dist_packaging=$2
+  local version=$3
+  local ppa_version=$4
+  ../docker-builder/run $dist ./get-source openjdk-7 $version
+  ../docker-builder/run $dist_packaging ./build-package openjdk-7 $version $dist $ppa_version enable_infinality.patch
+}
+
 build_openjdk_8() {
   local dist=$1
   local dist_packaging=$2
@@ -31,4 +40,4 @@ build_openjdk_8() {
   ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version enable_tuxjdk.patch
 }
 
-build_openjdk_8 xenial xenial 8u131-b11-0ubuntu1.16.04.2 ppa1
+build_openjdk_7 trusty trusty 7u131-2.6.9-0ubuntu0.14.04.2 ppa1
