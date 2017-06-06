@@ -31,4 +31,4 @@ build_openjdk_8() {
   ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version enable_tuxjdk.patch
 }
 
-build_openjdk_8 yakkety yakkety 8u131-b11-0ubuntu1.16.10.2 ppa1
+build_openjdk_8 xenial xenial 8u131-b11-0ubuntu1.16.04.2 ppa1
