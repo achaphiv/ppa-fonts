@@ -23,6 +23,7 @@ main() {
   update_changelog
   generate_package_from_ppa_archive || generate_package_from_official_archive
   upload_package_to_ppa
+  git_tag
   cd ${starting_dir}
 }
 
@@ -123,6 +124,10 @@ generate_package_from_official_archive() {
 
 upload_package_to_ppa() {
   dput -c ${starting_dir}/dput.cf ppa ${build_dir}/*changes
+}
+
+git_tag() {
+  git tag ${dist}-${package}-${new_version}
 }
 
 main
