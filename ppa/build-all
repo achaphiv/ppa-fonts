@@ -13,6 +13,8 @@ build_freetype() {
 
   ../docker-builder/run $dist ./get-source-freetype $version $updated_version
   ../docker-builder/run $dist_packaging ./build-freetype $dist $updated_version $new_version
+
+  git tag ${dist}-freetype-${new_version}
 }
 
 #build_freetype trusty 2.5.2-1ubuntu2.5 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
