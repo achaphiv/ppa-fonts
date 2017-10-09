@@ -8,7 +8,7 @@ ppa_version=$2
 package=freetype
 dist=$(lsb_release -s -c)
 
-updated_version=2.7.1
+updated_version=2.8.1
 new_version=${updated_version}-0ubuntu0${ppa_version}
 
 starting_dir=$(pwd)
@@ -54,7 +54,7 @@ fix_patches() {
   }
 
   add_patch 0001-Enable-table-validation-modules.patch
-  add_patch 0002-infinality-2.7.1-2017.01.11.patch
+  add_patch 0002-infinality-2.8-2017.05.24.patch
 
   # Resolve conflict caused by infinality
   sed -i -e '/freetype-2.1.7-backwards.compat.patch -p0/d' debian/patches-freetype/series
@@ -124,4 +124,3 @@ upload_package_to_ppa() {
 }
 
 main
-
