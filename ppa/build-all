@@ -1,5 +1,16 @@
 #!/bin/bash
 
+set -ex
+
+build_freetype() {
+  local dist=$1
+  local dist_packaging=$2
+  local version=$3
+  local ppa_version=$4
+  ../docker-builder/run $dist ./get-source-freetype $version
+  ../docker-builder/run $dist_packaging ./build-freetype $dist $ppa_version
+}
+
 #build_freetype trusty 2.5.2-1ubuntu2.5 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
 #build_freetype utopic 2.5.2-2ubuntu1.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
 #build_freetype vivid 2.5.2-2ubuntu3.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
@@ -16,4 +27,4 @@
 #../docker-builder/run yakkety ./build-freetype 2.6.3-3ubuntu1 '.16.10.2ppa1'
 
 #../docker-builder/run zesty ./build-cairo 1.14.8-1 ubuntu0ppa1
-../docker-builder/run zesty ./build-freetype 2.6.3-3ubuntu2 '.17.04ppa1'
+build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa1'
