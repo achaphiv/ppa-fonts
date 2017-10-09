@@ -9,7 +9,7 @@ package=freetype
 dist=$(lsb_release -s -c)
 
 updated_version=2.8
-new_version=${updated_version}-0ubuntu0${ppa_version}
+new_version=2.8.1-0ubuntu0${ppa_version}really${updated_version}
 
 starting_dir=$(pwd)
 build_dir=${starting_dir}/build-${package}-${dist}
@@ -114,6 +114,7 @@ generate_package_from_ppa_archive() {
 generate_package_from_official_archive() {
   cd ${working_dir}
   gpg --recv-keys E707FDA5
+  sed -i -e 's/^ver := .*/ver = 2.8/' debian/rules
   ./debian/rules get-orig-source
   tar xvzfp *.orig.tar.gz --strip-components=1
   mv *.orig.tar.gz ..
