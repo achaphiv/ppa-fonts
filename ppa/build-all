@@ -7,8 +7,12 @@ build_freetype() {
   local dist_packaging=$2
   local version=$3
   local ppa_version=$4
-  ../docker-builder/run $dist ./get-source-freetype $version
-  ../docker-builder/run $dist_packaging ./build-freetype $dist $ppa_version
+
+  local updated_version=2.8
+  local new_version=${updated_version}-0ubuntu0${ppa_version}
+
+  ../docker-builder/run $dist ./get-source-freetype $version $updated_version
+  ../docker-builder/run $dist_packaging ./build-freetype $dist $updated_version $new_version
 }
 
 #build_freetype trusty 2.5.2-1ubuntu2.5 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
