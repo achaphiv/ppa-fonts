@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -ex
+
+version=$1
+
+package=freetype
+dist=$(lsb_release -s -c)
+
+updated_version=2.8
+
+starting_dir=$(pwd)
+build_dir=${starting_dir}/build-${package}-${dist}
+
+main() {
+  remove_old_build
+  create_working_dir
+}
+
+remove_old_build() {
+  rm -rf ${build_dir}
+  mkdir ${build_dir}
+}
+
+create_working_dir() {
+  cd ${build_dir}
+  apt-get source ${package}=${version}
+
+  # Remove old packages
+  rm *.orig.tar.gz
+  rm *.diff.gz
+  rm *.dsc
+  rm ${package}*/*.tar.bz2
+
+  mv ${package}* ${package}-${updated_version}/
+}
+
+main
