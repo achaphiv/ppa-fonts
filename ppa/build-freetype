@@ -65,6 +65,7 @@ fix_patches() {
   sed -i -e '/enable-gxvalid-otvalid.patch/d' debian/patches-freetype/series
 
   # remove since updated version changes things
+  sed -i -e '/freetype-config.diff/d' debian/patches-freetype/series
   sed -i -e '/0001-Revert-pcf-Signedness-fixes.patch/d' debian/patches-freetype/series
   sed -i -e '/compiler_hardening_fixes.patch/d' debian/patches-ft2demos/series
 }
