@@ -31,7 +31,7 @@ create_working_dir() {
   rm *.dsc
   rm ${package}*/*.tar.bz2
 
-  mv ${package}* ${package}-${updated_version}/
+  ls ${package}-${updated_version} || mv ${package}* ${package}-${updated_version}/
 }
 
 main
