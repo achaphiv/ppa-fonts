@@ -24,5 +24,6 @@ build_openjdk_8() {
   git tag ${dist}-openjdk-8-${version}${ppa_version}
 }
 
-build_openjdk_8 zesty yakkety 8u131-b11-2ubuntu1.17.04.3 ppa1
-build_openjdk_8 xenial xenial 8u131-b11-2ubuntu1.16.04.3 ppa1
+build_openjdk_8 artful yakkety 8u151-b12-0ubuntu0.17.10.2 ppa1
+#build_openjdk_8 zesty yakkety 8u131-b11-2ubuntu1.17.04.3 ppa1
+#build_openjdk_8 xenial xenial 8u131-b11-2ubuntu1.16.04.3 ppa1
