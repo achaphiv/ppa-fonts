@@ -9,8 +9,11 @@ build_freetype() {
   local ppa_version=$4
 
   local updated_version=2.8
-  local new_version=${updated_version}-0ubuntu0${ppa_version}
-
+  if [[ $version == 2.8* ]]; then
+    local new_version=${version}${ppa_version}
+  else
+    local new_version=${updated_version}-0ubuntu0${ppa_version}
+  fi
   ../docker-builder/run $dist ./get-source-freetype $version $updated_version
   ../docker-builder/run $dist_packaging ./build-freetype $dist $updated_version $new_version
 
