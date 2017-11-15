@@ -9,6 +9,8 @@ build_openjdk_7() {
   local ppa_version=$4
   ../docker-builder/run $dist ./get-source openjdk-7 $version
   ../docker-builder/run $dist_packaging ./build-package openjdk-7 $version $dist $ppa_version enable_infinality.patch
+
+  git tag ${dist}-openjdk-7-${version}${ppa_version}
 }
 
 build_openjdk_8() {
@@ -18,6 +20,8 @@ build_openjdk_8() {
   local ppa_version=$4
   ../docker-builder/run $dist ./get-source openjdk-8 $version
   ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version enable_tuxjdk.patch
+
+  git tag ${dist}-openjdk-8-${version}${ppa_version}
 }
 
 build_openjdk_8 zesty yakkety 8u131-b11-2ubuntu1.17.04.3 ppa1
