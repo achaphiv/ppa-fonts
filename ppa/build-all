@@ -33,4 +33,6 @@ build_freetype() {
 #../docker-builder/run yakkety ./build-freetype 2.6.3-3ubuntu1 '.16.10.2ppa1'
 
 #../docker-builder/run zesty ./build-cairo 1.14.8-1 ubuntu0ppa1
-build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa2'
+#build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa2'
+
+build_freetype artful yakkety 2.8-0.2ubuntu2 '.17.10ppa1'
