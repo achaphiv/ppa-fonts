@@ -24,7 +24,7 @@ build_openjdk_8() {
   git tag ${dist}-openjdk-8-${version}${ppa_version}
 }
 
-build_openjdk_7 trusty trusty 7u151-2.6.11-2ubuntu0.14.04.1 ppa1
+#build_openjdk_7 trusty trusty 7u151-2.6.11-2ubuntu0.14.04.1 ppa1
 #build_openjdk_8 artful yakkety 8u151-b12-0ubuntu0.17.10.2 ppa1
 #build_openjdk_8 zesty yakkety 8u151-b12-0ubuntu0.17.04.2 ppa1
-#build_openjdk_8 xenial xenial 8u151-b12-0ubuntu0.16.04.2 ppa1
+build_openjdk_8 xenial xenial 8u162-b12-0ubuntu0.16.04.2 ppa1
