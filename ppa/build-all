@@ -8,7 +8,7 @@ build_freetype() {
   local version=$3
   local ppa_version=$4
 
-  local updated_version=2.8
+  local updated_version=2.8.1
   if [[ $version == 2.8* ]]; then
     local new_version=${version}${ppa_version}
   else
