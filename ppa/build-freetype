@@ -15,7 +15,7 @@ working_dir=${build_dir}/${package}-${version}
 main() {
   fix_patches
   update_changelog
-  generate_package_from_ubuntu_archive || generate_package_from_ppa_archive || generate_package_from_official_archive
+  generate_package_from_ppa_archive || generate_package_from_ubuntu_archive || generate_package_from_official_archive
   upload_package_to_ppa
   cd ${starting_dir}
 }
