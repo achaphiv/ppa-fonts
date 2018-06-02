@@ -5,13 +5,16 @@ set -ex
 build_freetype() {
   local dist=$1
   local dist_packaging=$2
-  local version=$3
+  local source_version=$3
   local ppa_version=$4
 
-  ../docker-builder/run $dist ./get-source-freetype $version
-  ../docker-builder/run $dist_packaging ./build-freetype $dist $version $ppa_version
+  local version=2.8.1
+  local full_version=${source_version}${ppa_version}
 
-  git tag ${dist}-freetype-${version}${ppa_version}
+  ../docker-builder/run $dist ./get-source-freetype $source_version
+  ../docker-builder/run $dist_packaging ./build-freetype $dist $version $full_version
+
+  git tag ${dist}-freetype-${full_version}
 }
 
 #build_freetype trusty 2.5.2-1ubuntu2.5 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
@@ -33,4 +36,4 @@ build_freetype() {
 #build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa2'
 
 #build_freetype artful yakkety 2.8-0.2ubuntu2 '.17.10ppa1'
-build_freetype bionic yakkety 2.8.1-2ubuntu2 '.18.04ppa5'
+build_freetype bionic yakkety 2.8.1-2ubuntu2 '.18.04ppa6'
