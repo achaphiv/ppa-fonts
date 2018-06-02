@@ -3,7 +3,6 @@
 set -ex
 
 version=$1
-updated_version=$2
 
 package=freetype
 dist=$(lsb_release -s -c)
@@ -31,7 +30,7 @@ create_working_dir() {
   rm *.dsc
   rm ${package}*/*.tar.bz2
 
-  ls ${package}-${updated_version} || mv ${package}* ${package}-${updated_version}/
+  mv ${package}* ${package}-${version}/
 }
 
 main
