@@ -33,4 +33,4 @@ build_freetype() {
 #build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa2'
 
 #build_freetype artful yakkety 2.8-0.2ubuntu2 '.17.10ppa1'
-build_freetype bionic yakkety 2.8.1-2ubuntu2 '.18.04ppa1'
+build_freetype bionic yakkety 2.8.1-2ubuntu2 '.18.04ppa2'
