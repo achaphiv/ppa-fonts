@@ -29,8 +29,6 @@ create_working_dir() {
   rm *.diff.gz
   rm *.dsc
   rm ${package}*/*.tar.bz2
-
-  mv ${package}*/ ${package}-${version}/
 }
 
 main
