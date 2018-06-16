@@ -1,0 +1,11 @@
+--- freetype-2.8.orig/include/freetype/config/ftoption.h	2017-05-01 03:39:06.000000000 -0400
++++ freetype-2.8/include/freetype/config/ftoption.h	2018-06-02 10:28:04.675255817 -0400
+@@ -684,7 +684,7 @@
+   /* [1] http://www.microsoft.com/typography/cleartype/truetypecleartype.aspx */
+   /*                                                                       */
+ /* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  1         */
+-#define TT_CONFIG_OPTION_SUBPIXEL_HINTING  2
++#define TT_CONFIG_OPTION_SUBPIXEL_HINTING  ( 1 | 2 )
+ /* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  ( 1 | 2 ) */
+ 
+ 
