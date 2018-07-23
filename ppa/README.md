@@ -88,7 +88,3 @@ https://github.com/archfan/infinality_bundle
 ## Distribution >= 18.04
 Enables v38 engine.
 https://www.freetype.org/freetype2/docs/subpixel-hinting.html
-
-# Alternatives
-
-https://github.com/bohoomil/fontconfig-ultimate
