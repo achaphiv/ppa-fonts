@@ -81,9 +81,13 @@ See: http://www.infinality.net/
 Applies bohoomil's variant.
 See: https://github.com/bohoomil/fontconfig-ultimate
 
-## Distribution >= 16.04:
+## Distribution <= 17.10:
 Applies archfan's variant.
 https://github.com/archfan/infinality_bundle
+
+## Distribution >= 18.04
+Enables v38 engine.
+https://www.freetype.org/freetype2/docs/subpixel-hinting.html
 
 # Alternatives
 
