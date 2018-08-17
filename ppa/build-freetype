@@ -58,6 +58,9 @@ ignore_issues() {
   # 3     | libraries have disappeared
   # 4     | libraries have been introduced
   sed -i -e 's/DPKG_GENSYMBOLS_CHECK_LEVEL = 4/DPKG_GENSYMBOLS_CHECK_LEVEL = 0/' debian/rules
+
+  # Avoid error about missing files in libfreetype6-dev.install
+  sed -i -e 's/--without-harfbuzz/& --enable-freetype-config/' debian/rules
 }
 
 update_changelog() {
