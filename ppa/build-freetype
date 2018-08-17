@@ -13,11 +13,17 @@ build_dir=${starting_dir}/build-${package}-${dist}
 working_dir=${build_dir}/${package}-${version}
 
 main() {
+  handle_version_mismatch
   fix_patches
   update_changelog
   generate_package_from_ppa_archive || generate_package_from_ubuntu_archive || generate_package_from_official_archive
   upload_package_to_ppa
   cd ${starting_dir}
+}
+
+handle_version_mismatch() {
+  cd ${build_dir}
+  ls ${package}-${version}/ || mv ${package}* ${package}-${version}/
 }
 
 fix_patches() {
