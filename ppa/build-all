@@ -8,8 +8,8 @@ build_freetype() {
   local source_version=$3
   local ppa_version=$4
 
-  local version=2.8.1
-  local full_version=${source_version}${ppa_version}
+  local version=2.9.1
+  local full_version=${version}${ppa_version}
 
   ../docker-builder/run $dist ./get-source-freetype $source_version
   ../docker-builder/run $dist_packaging ./build-freetype $dist $version $full_version
@@ -36,5 +36,5 @@ build_freetype() {
 #build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa2'
 
 #build_freetype artful yakkety 2.8-0.2ubuntu2 '.17.10ppa1'
-build_freetype bionic yakkety 2.8.1-2ubuntu2 '.18.04ppa8'
+build_freetype bionic yakkety 2.8.1-2ubuntu2 '.18.04ppa1'
 #../docker-builder/run bionic ./build-cairo 1.15.10-2 '.18.04ppa1'

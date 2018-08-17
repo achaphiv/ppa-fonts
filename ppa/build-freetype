@@ -25,11 +25,14 @@ fix_patches() {
 
   add_patch() {
     local patch_name=$1
-    cp ${starting_dir}/patches-freetype/$patch_name debian/patches-freetype/
+    cp ${starting_dir}/infinality_bundle/01_freetype2-iu/$patch_name debian/patches-freetype/
     echo $patch_name >> debian/patches-freetype/series
   }
 
-  add_patch enable_v38.patch
+  add_patch 0001-infinality-2.9.1-2018.06.21.patch
+
+  # Redundant
+  sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
 }
 
 update_changelog() {
@@ -39,7 +42,10 @@ update_changelog() {
   cat <<EOF | sed 's/^  //' > ${changelog}
   ${package} (${full_version}) ${dist}; urgency=low
 
-    * Enable interpreter v38 (infinality)
+    * Ignore compiler warnings
+    * Remove unnecessary patches
+    * Add infinality patch
+    * Ignore extra symbols
 
    -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
 
