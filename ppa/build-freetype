@@ -15,6 +15,7 @@ working_dir=${build_dir}/${package}-${version}
 main() {
   handle_version_mismatch
   fix_patches
+  ignore_issues
   update_changelog
   generate_package_from_ppa_archive || generate_package_from_ubuntu_archive || generate_package_from_official_archive
   upload_package_to_ppa
@@ -44,6 +45,19 @@ fix_patches() {
   sed -i -e '/CVE-2018-6942.patch/d' debian/patches-freetype/series
   sed -i -e '/0001-truetype-Fix-mmvar-array-pointers.patch/d' debian/patches-freetype/series
   sed -i -e '/0001-truetype-Fix-mmvar-array-pointers-part-2.patch/d' debian/patches-freetype/series
+}
+
+ignore_issues() {
+  cd ${working_dir}
+  # ignore compiler warnings
+  sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
+  # Level | Failure
+  # 0     | impossible (all checks disabled)
+  # 1     | symbols have disappeared
+  # 2     | symbols have been introduced
+  # 3     | libraries have disappeared
+  # 4     | libraries have been introduced
+  sed -i -e 's/DPKG_GENSYMBOLS_CHECK_LEVEL = 4/DPKG_GENSYMBOLS_CHECK_LEVEL = 0/' debian/rules
 }
 
 update_changelog() {
