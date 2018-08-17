@@ -39,6 +39,11 @@ fix_patches() {
 
   # Redundant
   sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches-freetype/series
+
+  # Unecessary with new version
+  sed -i -e '/CVE-2018-6942.patch/d' debian/patches-freetype/series
+  sed -i -e '/0001-truetype-Fix-mmvar-array-pointers.patch/d' debian/patches-freetype/series
+  sed -i -e '/0001-truetype-Fix-mmvar-array-pointers-part-2.patch/d' debian/patches-freetype/series
 }
 
 update_changelog() {
