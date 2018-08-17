@@ -49,8 +49,10 @@ fix_patches() {
 
 ignore_issues() {
   cd ${working_dir}
+
   # ignore compiler warnings
   sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
+
   # Level | Failure
   # 0     | impossible (all checks disabled)
   # 1     | symbols have disappeared
@@ -66,7 +68,6 @@ ignore_issues() {
 update_changelog() {
   cd ${working_dir}
   changelog=$(mktemp)
-
   cat <<EOF | sed 's/^  //' > ${changelog}
   ${package} (${full_version}) ${dist}; urgency=low
 
