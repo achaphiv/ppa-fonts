@@ -28,4 +28,5 @@ build_openjdk_8() {
 #build_openjdk_8 xenial xenial 8u191-b12-0ubuntu0.16.04.1 ppa1
 #build_openjdk_8 zesty yakkety 8u151-b12-0ubuntu0.17.04.2 ppa1
 #build_openjdk_8 artful yakkety 8u171-b11-0ubuntu0.17.10.1 ppa1
-build_openjdk_8 bionic bionic 8u191-b12-0ubuntu0.18.04.1 ppa1
+#build_openjdk_8 bionic bionic 8u191-b12-0ubuntu0.18.04.1 ppa1
+build_openjdk_8 cosmic cosmic 8u191-b12-0ubuntu0.18.10.1 ppa1
