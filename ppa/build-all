@@ -40,4 +40,5 @@ build_freetype() {
 #build_freetype bionic yakkety 2.8.1-2ubuntu2 '.18.04ppa3'
 #../docker-builder/run bionic ./build-cairo 1.15.10-2 '.18.04ppa1'
 
-build_freetype cosmic cosmic 2.8.1-2ubuntu2 '.18.10ppa1'
+#build_freetype cosmic cosmic 2.8.1-2ubuntu2 '.18.10ppa1'
+../docker-builder/run cosmic ./build-cairo 1.15.12-1 '.18.10ppa1'
