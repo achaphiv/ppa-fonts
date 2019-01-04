@@ -17,6 +17,18 @@ build_freetype() {
   git tag ${dist}-freetype-${full_version}
 }
 
+build_cairo() {
+  local dist=$1
+  local source_version=$2
+  local ppa_version=$3
+
+  local full_version=${source_version}${ppa_version}
+
+  ../docker-builder/run $dist ./build-cairo $source_version $ppa_version
+
+  git tag ${dist}-freetype-${full_version}
+}
+
 #build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa2'
 
 #build_freetype artful yakkety 2.8-0.2ubuntu2 '.17.10ppa1'
