@@ -17,22 +17,6 @@ build_freetype() {
   git tag ${dist}-freetype-${full_version}
 }
 
-#build_freetype trusty 2.5.2-1ubuntu2.5 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-#build_freetype utopic 2.5.2-2ubuntu1.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-#build_freetype vivid 2.5.2-2ubuntu3.1 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-#build_freetype wily 2.5.2-4ubuntu2 'infinality-2.5.3.patch' 'ppa1bohoomileb5a6af0e99ec0d1c25521b6f8196106508c9360'
-#build xenial ./build-freetype 2.6.1-0.1ubuntu2 'enable-subpixel-hinting.patch' 'ppa8'
-#build_fontconfig xenial 2.11.94-0ubuntu1 ppa1
-
-#../docker-builder/run trusty ./build-freetype-2.5.2 2.5.2-1ubuntu2.8 'ppa1'
-
-#../docker-builder/run xenial ./build-cairo 1.14.6-1 ubuntu0ppa1
-#../docker-builder/run xenial ./build-freetype 2.6.1-0.1ubuntu2 '.16.04.2ppa4'
-
-#../docker-builder/run yakkety ./build-cairo 1.14.6-1build1 ubuntu0ppa1
-#../docker-builder/run yakkety ./build-freetype 2.6.3-3ubuntu1 '.16.10.2ppa1'
-
-#../docker-builder/run zesty ./build-cairo 1.14.8-1 ubuntu0ppa1
 #build_freetype zesty yakkety 2.6.3-3ubuntu2 '.17.04ppa2'
 
 #build_freetype artful yakkety 2.8-0.2ubuntu2 '.17.10ppa1'
