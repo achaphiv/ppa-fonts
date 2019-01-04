@@ -1,0 +1,11 @@
+diff -Naur before/debian/rules after/debian/rules
+--- before/debian/rules	2019-01-04 14:02:04.955306352 -0500
++++ after/debian/rules	2019-01-04 14:05:22.610556407 -0500
+@@ -365,6 +365,7 @@
+ 	hotspot-ia64.diff \
+ 	jdk-8132985-backport-double-free.patch \
+ 	jdk-8139803-backport-warning.patch \
++	add-fontconfig-support.diff \
+ 
+ ifeq ($(derivative),Debian)
+   COMMON_PATCHES += \

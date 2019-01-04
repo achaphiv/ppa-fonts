@@ -19,7 +19,7 @@ build_openjdk_8() {
   local version=$3
   local ppa_version=$4
   ../docker-builder/run $dist ./get-source openjdk-8 $version
-  ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version enable_tuxjdk.patch
+  ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version enable_tuxjdk_191.patch
 
   git tag ${dist}-openjdk-8-${version}${ppa_version}
 }
