@@ -18,8 +18,10 @@ build_openjdk_8() {
   local dist_packaging=$2
   local version=$3
   local ppa_version=$4
+  local patch_file=$5
+
   ../docker-builder/run $dist ./get-source openjdk-8 $version
-  ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version enable_tuxjdk_191.patch
+  ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version $patch_file
 
   git tag ${dist}-openjdk-8-${version}${ppa_version}
 }
@@ -30,5 +32,4 @@ build_openjdk_8() {
 #build_openjdk_8 artful yakkety 8u171-b11-0ubuntu0.17.10.1 ppa1
 #build_openjdk_8 bionic bionic 8u191-b12-2ubuntu0.18.04.1 ppa2
 #build_openjdk_8 cosmic cosmic 8u191-b12-2ubuntu0.18.10.1 ppa2
-build_openjdk_8 disco disco 8u212-b01-1 ubuntu0ppa1
-
+build_openjdk_8 disco disco 8u212-b01-1 ubuntu0ppa1 enable_tuxjdk_212.patch

@@ -1,0 +1,11 @@
+diff -Naur before/debian/rules after/debian/rules
+--- before/debian/rules	2019-05-05 23:07:15.025924349 -0400
++++ after/debian/rules	2019-05-05 23:08:12.312129776 -0400
+@@ -357,6 +357,7 @@
+ 	jdk-i18n-pt_BR.diff \
+ 	jdk-java-nio-bits-unligned-aarch64.diff \
+ 	hotspot-ia64.diff \
++  add-fontconfig-support.diff \
+
+ # FIXME:
+ #	dont-strip-images.diff \
