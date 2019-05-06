@@ -23,10 +23,11 @@ build_freetype_2_9_1() {
   local source_version=$3
   local ppa_version=$4
 
+  local version=2.9.1
   local full_version=${source_version}${ppa_version}
 
   ../docker-builder/run $dist ./get-source-freetype $source_version
-  ../docker-builder/run $dist_packaging ./build-freetype $dist $source_version $full_version
+  ../docker-builder/run $dist_packaging ./build-freetype $dist $version $full_version
 
   git tag ${dist}-freetype-${full_version}
 }
