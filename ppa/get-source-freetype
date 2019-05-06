@@ -26,9 +26,9 @@ create_working_dir() {
 
   # Remove old packages
   rm *.orig.tar.gz
-  rm *.diff.gz
+  rm -f *.diff.gz
   rm *.dsc
-  rm ${package}*/*.tar.bz2
+  rm -f ${package}*/*.tar.bz2
 }
 
 main
