@@ -17,7 +17,7 @@ main() {
   fix_patches
   ignore_issues
   update_changelog
-  generate_package_from_official_archive
+  generate_package_from_ubuntu_archive
   upload_package_to_ppa
   cd ${starting_dir}
 }
@@ -78,9 +78,18 @@ EOF
   mv ${changelog} debian/changelog
 }
 
-generate_package_from_official_archive() {
+generate_package_from_url() {
+  local url=$1
+
+  cd ${build_dir}
+  wget $url || return 1
+  tar xvzfp freetype_${version}.orig.tar.gz
   cd ${working_dir}
-  debuild -S -sa -pgpg2
+  debuild -S -sd -pgpg2
+}
+
+generate_package_from_ubuntu_archive() {
+  generate_package_from_url http://archive.ubuntu.com/ubuntu/pool/main/f/freetype/freetype_${version}.orig.tar.gz
 }
 
 upload_package_to_ppa() {
