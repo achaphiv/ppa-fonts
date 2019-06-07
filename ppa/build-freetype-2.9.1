@@ -80,6 +80,7 @@ EOF
 
 generate_package_from_apt_get_source_archive() {
   cd ${working_dir}
+  dpkg-source --commit
   debuild -S -sd -pgpg2
 }
 
