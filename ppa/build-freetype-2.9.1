@@ -24,7 +24,7 @@ main() {
 
 handle_version_mismatch() {
   cd ${build_dir}
-  ls ${package}-${version}/ || mv ${package}* ${package}-${version}/
+  ls ${package}-${version}/ || mv ${package}*/ ${package}-${version}/
 }
 
 fix_patches() {
@@ -78,7 +78,7 @@ EOF
 
 generate_package_from_apt_get_source_archive() {
   cd ${working_dir}
-  debuild -S -sd -pgpg2
+  debuild -S -sa -pgpg2
 }
 
 upload_package_to_ppa() {
