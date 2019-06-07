@@ -30,16 +30,14 @@ handle_version_mismatch() {
 fix_patches() {
   cd ${working_dir}
 
-  add_patch() {
-    local patch_name=$1
-    cp ${starting_dir}/infinality_bundle/01_freetype2-iu/$patch_name debian/patches/
-    echo $patch_name >> debian/patches/series
-  }
-
-  add_patch 0001-infinality-2.9.1-2018.06.21.patch
-
   # Redundant
-  sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches/series
+  quilt pop enable-subpixel-rendering.patch
+  quilt delete
+  quilt push -a
+
+  quilt import ${starting_dir}/infinality_bundle/01_freetype2-iu/0001-infinality-2.9.1-2018.06.21.patch
+
+  quilt refresh
 }
 
 ignore_issues() {
@@ -80,7 +78,6 @@ EOF
 
 generate_package_from_apt_get_source_archive() {
   cd ${working_dir}
-  dpkg-source --commit
   debuild -S -sd -pgpg2
 }
 
