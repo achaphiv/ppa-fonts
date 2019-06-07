@@ -23,12 +23,6 @@ remove_old_build() {
 create_working_dir() {
   cd ${build_dir}
   apt-get source ${package}=${version}
-
-  # Remove old packages
-  rm *.orig.tar.gz
-  rm -f *.diff.gz
-  rm *.dsc
-  rm -f ${package}*/*.tar.bz2
 }
 
 main
