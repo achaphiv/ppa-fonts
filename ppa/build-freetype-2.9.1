@@ -1,0 +1,112 @@
+#!/bin/bash
+
+set -ex
+
+dist=$1
+version=$2
+full_version=$3
+
+package=freetype
+
+starting_dir=$(pwd)
+build_dir=${starting_dir}/build-${package}-${dist}
+working_dir=${build_dir}/${package}-${version}
+
+main() {
+  handle_version_mismatch
+  fix_patches
+  ignore_issues
+  update_changelog
+  generate_package_from_ppa_archive || generate_package_from_ubuntu_archive || generate_package_from_official_archive
+  upload_package_to_ppa
+  cd ${starting_dir}
+}
+
+handle_version_mismatch() {
+  cd ${build_dir}
+  ls ${package}-${version}/ || mv ${package}* ${package}-${version}/
+}
+
+fix_patches() {
+  cd ${working_dir}
+
+  add_patch() {
+    local patch_name=$1
+    cp ${starting_dir}/infinality_bundle/01_freetype2-iu/$patch_name debian/patches/
+    echo $patch_name >> debian/patches/series
+  }
+
+  add_patch 0001-infinality-2.9.1-2018.06.21.patch
+
+  # Redundant
+  sed -i -e '/enable-subpixel-rendering.patch/d' debian/patches/series
+}
+
+ignore_issues() {
+  cd ${working_dir}
+
+  # ignore compiler warnings
+  sed -i -e '/export DEB_CFLAGS_MAINT_APPEND := -Werror/d' debian/rules
+
+  # Level | Failure
+  # 0     | impossible (all checks disabled)
+  # 1     | symbols have disappeared
+  # 2     | symbols have been introduced
+  # 3     | libraries have disappeared
+  # 4     | libraries have been introduced
+  sed -i -e 's/DPKG_GENSYMBOLS_CHECK_LEVEL = 4/DPKG_GENSYMBOLS_CHECK_LEVEL = 0/' debian/rules
+
+  # Avoid error about missing files in libfreetype6-dev.install
+  sed -i -e 's/--without-harfbuzz/& --enable-freetype-config/' debian/rules
+}
+
+update_changelog() {
+  cd ${working_dir}
+  changelog=$(mktemp)
+  cat <<EOF | sed 's/^  //' > ${changelog}
+  ${package} (${full_version}) ${dist}; urgency=low
+
+    * Ignore compiler warnings
+    * Remove unnecessary patches
+    * Add infinality patch
+    * Ignore extra symbols
+
+   -- ${DEBFULLNAME} <${DEBEMAIL}>  $(date -R)
+
+EOF
+  cat debian/changelog >> ${changelog}
+  mv ${changelog} debian/changelog
+}
+
+generate_package_from_url() {
+  local url=$1
+
+  cd ${build_dir}
+  wget $url || return 1
+  tar xvzfp freetype_${version}.orig.tar.gz
+  cd ${working_dir}
+  debuild -S -sd -pgpg2
+}
+
+generate_package_from_ubuntu_archive() {
+  generate_package_from_url http://archive.ubuntu.com/ubuntu/pool/main/f/freetype/freetype_${version}.orig.tar.gz
+}
+
+generate_package_from_ppa_archive() {
+  generate_package_from_url https://launchpad.net/~no1wantdthisname/+archive/ubuntu/ppa/+files/freetype_${version}.orig.tar.gz
+}
+
+generate_package_from_official_archive() {
+  cd ${working_dir}
+  gpg --recv-keys E707FDA5
+  ./debian/rules get-orig-source
+  tar xvzfp *.orig.tar.gz --strip-components=1
+  mv *.orig.tar.gz ..
+  debuild -S -sa -pgpg2
+}
+
+upload_package_to_ppa() {
+  dput -c ${starting_dir}/dput.cf ppa ${build_dir}/*changes
+}
+
+main
