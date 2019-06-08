@@ -79,6 +79,7 @@ EOF
 
 generate_package_from_new_source_archive() {
   cd ${working_dir}
+  dpkg-source --commit
   debuild -S -sa -pgpg2
 }
 
