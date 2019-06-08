@@ -2,8 +2,6 @@
 
 set -ex
 
-export QUILT_PATCHES=debian/patches
-
 dist=$1
 version=$2
 full_version=$3
@@ -31,6 +29,10 @@ handle_version_mismatch() {
 
 fix_patches() {
   cd ${working_dir}
+
+  export QUILT_PATCHES=debian/patches
+
+  quilt push -a
 
   # Redundant
   quilt pop enable-subpixel-rendering.patch
@@ -79,7 +81,6 @@ EOF
 
 generate_package_from_new_source_archive() {
   cd ${working_dir}
-  dpkg-source --commit
   debuild -S -sa -pgpg2
 }
 
