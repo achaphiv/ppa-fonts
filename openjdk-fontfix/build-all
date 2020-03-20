@@ -23,7 +23,7 @@ build_openjdk_8() {
   ../docker-builder/run $dist ./get-source openjdk-8 $version
   ../docker-builder/run $dist_packaging ./build-package openjdk-8 $version $dist $ppa_version $patch_file
 
-  git tag ${dist}-openjdk-8-${version}${ppa_version}
+  git tag ${dist}-openjdk-8-${version}${ppa_version/~/_}
 }
 
 #build_openjdk_7 trusty trusty 7u211-2.6.17-0ubuntu0.1 ppa1
