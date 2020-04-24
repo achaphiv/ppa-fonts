@@ -17,6 +17,21 @@ build_freetype() {
   git tag ${dist}-freetype-${full_version}
 }
 
+build_freetype_2_10_1() {
+  local dist=$1
+  local dist_packaging=$2
+  local source_version=$3
+  local ppa_version=$4
+
+  local version=2.10.1
+  local full_version=${version}-0ubuntu0${ppa_version}
+
+  ../docker-builder/run $dist ./get-source-freetype $source_version
+  ../docker-builder/run $dist_packaging ./bin/build-freetype-2.10.1 $dist $version $full_version
+
+  git tag ${dist}-freetype-${full_version}
+}
+
 build_freetype_2_9_1() {
   local dist=$1
   local dist_packaging=$2
@@ -66,5 +81,7 @@ build_cairo() {
 #build_freetype cosmic cosmic 2.8.1-2ubuntu2 '.18.10ppa1'
 #../docker-builder/run cosmic ./build-cairo 1.15.12-1 '.18.10ppa1'
 
-build_freetype_2_9_1 disco disco 2.9.1-3 '2.9.1c-3ubuntu0.19.04ppa1'
+#build_freetype_2_9_1 disco disco 2.9.1-3 '2.9.1c-3ubuntu0.19.04ppa1'
 #../docker-builder/run disco ./build-cairo 1.16.0-4 'ubuntu0.19.04ppa1'
+
+build_freetype_2_10_1 focal focal 2.10.1-2 '.20.04ppa1'
