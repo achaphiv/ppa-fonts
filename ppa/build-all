@@ -12,7 +12,7 @@ build_freetype() {
   local full_version=${version}-0ubuntu0${ppa_version}
 
   ../docker-builder/run $dist ./bin/get-source-freetype $source_version
-  ../docker-builder/run $dist_packaging ./build-freetype $dist $version $full_version
+  ../docker-builder/run $dist_packaging ./bin/build-freetype $dist $version $full_version
 
   git tag ${dist}-freetype-${full_version}
 }
