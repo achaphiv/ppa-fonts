@@ -81,6 +81,10 @@ See: http://www.infinality.net/
 Applies bohoomil's variant.
 See: https://github.com/bohoomil/fontconfig-ultimate
 
-## Distribution >= 16.04:
+## Distribution <= 19.10:
 Applies archfan's variant.
 https://github.com/archfan/infinality_bundle
+
+## Distribution >= 20.04:
+Applies pdeljanov's variant.
+https://github.com/pdeljanov/infinality-remix
