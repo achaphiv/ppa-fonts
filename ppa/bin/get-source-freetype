@@ -8,7 +8,7 @@ package=freetype
 dist=$(lsb_release -s -c)
 
 starting_dir=$(pwd)
-build_dir=${starting_dir}/build-${package}-${dist}
+build_dir=${starting_dir}/build/${package}-${dist}
 
 main() {
   remove_old_build
@@ -17,7 +17,7 @@ main() {
 
 remove_old_build() {
   rm -rf ${build_dir}
-  mkdir ${build_dir}
+  mkdir -p ${build_dir}
 }
 
 create_working_dir() {
