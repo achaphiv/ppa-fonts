@@ -24,7 +24,7 @@ build_freetype_2_10_1() {
   local ppa_version=$4
 
   local version=2.10.1
-  local full_version=${version}-0ubuntu0${ppa_version}
+  local full_version=${source_version}ubuntu0${ppa_version}
 
   ../docker-builder/run $dist ./bin/get-source-freetype $source_version
   ../docker-builder/run $dist_packaging ./bin/build-freetype-2.10.1 $dist $version $full_version
