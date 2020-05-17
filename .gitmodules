@@ -7,3 +7,6 @@
 [submodule "ppa/patches-freetype-2.5.2"]
 	path = ppa/patches-freetype-2.5.2
 	url = git@github.com:bohoomil/fontconfig-ultimate
+[submodule "ppa/patches/2.10.1"]
+	path = ppa/patches/2.10.1
+	url = https://github.com/pdeljanov/infinality-remix
