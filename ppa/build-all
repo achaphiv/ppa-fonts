@@ -11,7 +11,7 @@ build_freetype() {
   local version=2.9.1
   local full_version=${version}-0ubuntu0${ppa_version}
 
-  ../docker-builder/run $dist ./get-source-freetype $source_version
+  ../docker-builder/run $dist ./bin/get-source-freetype $source_version
   ../docker-builder/run $dist_packaging ./build-freetype $dist $version $full_version
 
   git tag ${dist}-freetype-${full_version}
@@ -26,7 +26,7 @@ build_freetype_2_10_1() {
   local version=2.10.1
   local full_version=${version}-0ubuntu0${ppa_version}
 
-  ../docker-builder/run $dist ./get-source-freetype $source_version
+  ../docker-builder/run $dist ./bin/get-source-freetype $source_version
   ../docker-builder/run $dist_packaging ./bin/build-freetype-2.10.1 $dist $version $full_version
 
   git tag ${dist}-freetype-${full_version}
@@ -40,7 +40,7 @@ build_freetype_2_9_1() {
 
   local version=2.9.1c
 
-  ../docker-builder/run $dist ./get-source-freetype $source_version
+  ../docker-builder/run $dist ./bin/get-source-freetype $source_version
 
   pushd build-freetype-${dist}
 
