@@ -45,6 +45,6 @@ debuild -S -sd -pgpg2
 
 cd ../
 
-dput -c ${starting_dir}/dput.cf ppa *changes
+dput -c ${starting_dir}/conf/dput.cf ppa *changes
 
 cd ${starting_dir}

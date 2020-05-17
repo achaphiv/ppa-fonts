@@ -111,7 +111,7 @@ generate_package_from_official_archive() {
 }
 
 upload_package_to_ppa() {
-  dput -c ${starting_dir}/dput.cf ppa ${build_dir}/*changes
+  dput -c ${starting_dir}/conf/dput.cf ppa ${build_dir}/*changes
 }
 
 main
