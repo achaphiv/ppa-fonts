@@ -54,7 +54,7 @@ build_freetype_2_9_1() {
 
   popd
 
-  ../docker-builder/run $dist_packaging ./build-freetype-2.9.1 $dist $version $full_version
+  ../docker-builder/run $dist_packaging ./bin/build-freetype-2.9.1 $dist $version $full_version
 
   git tag ${dist}-freetype-${full_version}
 }
