@@ -2,7 +2,7 @@
 	path = openjdk-fontfix/tuxjdk
 	url = git@github.com:tuxjdk/tuxjdk
 [submodule "ppa/infinality_bundle"]
-	path = ppa/infinality_bundle
+	path = ppa/patches/2.10.0
 	url = git@github.com:archfan/infinality_bundle
 [submodule "ppa/patches-freetype-2.5.2"]
 	path = ppa/patches/2.5.2
