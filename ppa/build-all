@@ -66,7 +66,7 @@ build_cairo() {
 
   local full_version=${source_version}${ppa_version}
 
-  ../docker-builder/run $dist ./build-cairo $source_version $ppa_version
+  ../docker-builder/run $dist ./bin/build-cairo $source_version $ppa_version
 
   git tag ${dist}-cairo-${full_version}
 }
