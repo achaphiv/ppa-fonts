@@ -21,7 +21,7 @@ apt-get source ${package}=${version}
 
 cd ${package}*/
 
-for patch in $starting_dir/infinality_bundle/03_cairo-iu/cairo-respect-fontconfig_pb.patch; do
+for patch in $starting_dir/patches/2.10.1/cairo-infinality-remix/cairo-respect-fontconfig_pb.patch; do
   cp $patch debian/patches
   echo $(basename $patch) >> debian/patches/series
 done
