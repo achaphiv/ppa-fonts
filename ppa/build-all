@@ -84,4 +84,5 @@ build_cairo() {
 #build_freetype_2_9_1 disco disco 2.9.1-3 '2.9.1c-3ubuntu0.19.04ppa1'
 #../docker-builder/run disco ./build-cairo 1.16.0-4 'ubuntu0.19.04ppa1'
 
-build_freetype_2_10_1 focal focal 2.10.1-2 '.20.04ppa1'
+#build_freetype_2_10_1 focal focal 2.10.1-2 '.20.04ppa1'
+build_cairo focal 1.16.0-4ubuntu1 'ppa1'
